@@ -1,0 +1,13 @@
+# -*- mode: gitignore; -*-
+
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+projectile-bookmarks.eld
+
+/auto-save-list/
+/elpa/
+/transient/

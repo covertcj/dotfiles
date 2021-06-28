@@ -1,0 +1,4 @@
+* Yay, Emacs
+ * Installation
+   * Inside Emacs
+     - ~M-x all-the-icons-install-fonts~
