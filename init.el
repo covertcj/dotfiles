@@ -90,9 +90,9 @@
   :config
   (general-evil-setup)
   (general-create-definer cjc/leader-key
-			  :keymaps '(normal insert visual emacs)
-			  :prefix "SPC"
-			  :non-normal-prefix "C-SPC")
+    :states 'normal
+    :prefix "SPC"
+    :non-normal-prefix "C-SPC")
 
   (cjc/leader-key
    "b"  '(:ignore b :which-key "buffers")
@@ -132,6 +132,7 @@
     "tf" '(hydra-scale-text/body :which-key "font scaling")))
 
 (use-package projectile
+  :after general
   :diminish projectile-mode
   :init
   (setq projectile-project-search-path '())
@@ -150,19 +151,23 @@
   ;:custom
   ;(magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(defun org-toggle-emphasis ()
+(defun cjc/org-toggle-emphasis ()
   "Toggle hiding/showing of org emphasize markers."
   (interactive)
   (if org-hide-emphasis-markers
       (set-variable 'org-hide-emphasis-markers nil)
-    (set-variable 'org-hide-emphasis-markers t)))
-(define-key org-mode-map (kbd "C-c e") 'org-toggle-emphasis)
+    (set-variable 'org-hide-emphasis-markers t))
+  (org-mode-restart))
 
 (use-package org
   ;:hook org-mode . cjc/org-mode-setup
   :config
   (setq org-ellipsis " ▾"
-	org-hide-emphasis-markers t))
+	org-hide-emphasis-markers t)
+  (cjc/leader-key
+    :keymaps 'org-mode-map
+    "m" '(:ignore t :which-key "org-mode")
+    "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis")))
 
 ;; TODO: WIP
 ;(use-package org-bullets
