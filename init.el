@@ -150,6 +150,28 @@
   ;:custom
   ;(magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+(defun org-toggle-emphasis ()
+  "Toggle hiding/showing of org emphasize markers."
+  (interactive)
+  (if org-hide-emphasis-markers
+      (set-variable 'org-hide-emphasis-markers nil)
+    (set-variable 'org-hide-emphasis-markers t)))
+(define-key org-mode-map (kbd "C-c e") 'org-toggle-emphasis)
+
+(use-package org
+  ;:hook org-mode . cjc/org-mode-setup
+  :config
+  (setq org-ellipsis " ▾"
+	org-hide-emphasis-markers t))
+
+;; TODO: WIP
+;(use-package org-bullets
+;  :after org
+  
+
+;; TODO doesn't seem to do anything...
+;(use-package org-appear
+;  :hook (org-mode . org-appear-mode))
 
 ; (use-package helpful
 
@@ -163,7 +185,7 @@
    '("47db50ff66e35d3a440485357fb6acb767c100e135ccdf459060407f8baea7b2" "cbdf8c2e1b2b5c15b34ddb5063f1b21514c7169ff20e081d39cf57ffee89bc1e" default))
  '(ivy-mode t)
  '(package-selected-packages
-   '(forge evil-magit magit-evil magit projectile hydra evil-collection general doom-themes ivy-rich counsel which-key use-package swiper rainbow-delimiters doom-modeline)))
+   '(org-appear forge evil-magit magit-evil magit projectile hydra evil-collection general doom-themes ivy-rich counsel which-key use-package swiper rainbow-delimiters doom-modeline)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
