@@ -5,6 +5,7 @@
 /.emacs.desktop
 /.emacs.desktop.lock
 *.elc
+*.sqlite
 
 projectile-bookmarks.eld
 

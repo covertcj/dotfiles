@@ -144,6 +144,9 @@
     "p" '(:keymap projectile-command-map :wk "projectile")))
   
 (use-package magit)
+
+;; TODO: Play with forge
+(use-package forge)
   ;:custom
   ;(magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
@@ -160,7 +163,7 @@
    '("47db50ff66e35d3a440485357fb6acb767c100e135ccdf459060407f8baea7b2" "cbdf8c2e1b2b5c15b34ddb5063f1b21514c7169ff20e081d39cf57ffee89bc1e" default))
  '(ivy-mode t)
  '(package-selected-packages
-   '(evil-magit magit-evil magit projectile hydra evil-collection general doom-themes ivy-rich counsel which-key use-package swiper rainbow-delimiters doom-modeline)))
+   '(forge evil-magit magit-evil magit projectile hydra evil-collection general doom-themes ivy-rich counsel which-key use-package swiper rainbow-delimiters doom-modeline)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
