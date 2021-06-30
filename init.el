@@ -159,15 +159,57 @@
     (set-variable 'org-hide-emphasis-markers t))
   (org-mode-restart))
 
+(defun cjc/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (auto-fill-mode 0)
+  (visual-line-mode 1)
+  (setq evil-auto-indent nil))
+
 (use-package org
-  ;:hook org-mode . cjc/org-mode-setup
+  :hook (org-mode . cjc/org-mode-setup)
   :config
   (setq org-ellipsis " ▾"
 	org-hide-emphasis-markers t)
   (cjc/leader-key
     :keymaps 'org-mode-map
     "m" '(:ignore t :which-key "org-mode")
-    "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis")))
+    "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis"))
+
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Roboto" :weight 'regular :height (cdr face)))
+
+    ; Ensure that anything that should be fixed-pitch in Org files appears that way
+    (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil    :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+    (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
+    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+
+(use-package org-superstar
+  :after org
+  :hook (org-mode . org-superstar-mode)
+  :config
+  (setq org-superstar-headline-bullets-list '("❖" "✱" "✹" "✸" "✦" "✧")
+	org-superstar-leading-bullet " "))
+  ;(setq org-superstar-headline-bullets-list '("◉" "○" "■" "◆" "▲" "▶")))
+
+;; Replace list hyphen with dot
+(font-lock-add-keywords 'org-mode
+                        '(("^ *\\([-]\\) "
+                          (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
 
 ;; TODO: WIP
 ;(use-package org-bullets
