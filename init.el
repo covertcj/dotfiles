@@ -170,7 +170,17 @@
   :hook (org-mode . cjc/org-mode-setup)
   :config
   (setq org-ellipsis " ▾"
-	org-hide-emphasis-markers t)
+	org-hide-emphasis-markers t
+
+	org-agenda-start-with-log-mode t
+	org-log-done 'time
+	org-log-into-drawer t
+	org-agenda-files
+	'("~/Google Drive/Org Notes/Tasks.org"
+	  "~/Google Drive/Org Notes/Birthdays.org")
+	org-todo-keywords
+	'(("TODO(t)" "NEXT(n)" "|" "DONE(d!)"))
+
   (cjc/leader-key
     :keymaps 'org-mode-map
     "m" '(:ignore t :which-key "org-mode")
