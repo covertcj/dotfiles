@@ -218,6 +218,15 @@ These icons are required for ~doom-modeline~.
 ** Ivy
 
 #+begin_src emacs-lisp
+(use-package ivy
+  :diminish
+  :bind (:map ivy-minibuffer-map
+	      ("TAB" . ivy-alt-done)
+	      ("C-j" . ivy-next-line)
+	      ("C-k" . ivy-previous-line))
+  :config
+  (ivy-mode 1))
+
 (use-package counsel
   :config
   (counsel-mode 1))
@@ -229,7 +238,7 @@ These icons are required for ~doom-modeline~.
 
 (use-package swiper
   :after ivy
-  :bind (("C-s" . swiper))) ; TODO: maybe move keybind
+  :bind (("C-s" . swiper)))
 #+end_src
 
 ** Git
@@ -243,12 +252,14 @@ These icons are required for ~doom-modeline~.
 
 #+begin_src emacs-lisp
 (use-package projectile
-  :after general
+  :after (general ivy)
   :diminish projectile-mode
   :init
   (setq projectile-project-search-path '())
   (when (file-directory-p "~/dev") (push "~/dev" projectile-project-search-path))
   (when (file-directory-p "~/work") (push "~/work" projectile-project-search-path))
+
+  (setq projectile-completion-system 'ivy)
 
   :config
   (projectile-mode 1)

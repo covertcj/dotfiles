@@ -126,29 +126,40 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package ivy
+  :diminish
+  :bind (:map ivy-minibuffer-map
+	      ("TAB" . ivy-alt-done)
+	      ("C-j" . ivy-next-line)
+	      ("C-k" . ivy-previous-line))
+  :config
+  (ivy-mode 1))
+
 (use-package counsel
   :config
   (counsel-mode 1))
 
 (use-package ivy-rich
-  :after (ivy)
+  :after ivy
   :init
   (ivy-rich-mode 1))
 
 (use-package swiper
   :after ivy
-  :bind (("C-s" . swiper))) ; TODO: maybe move keybind
+  :bind (("C-s" . swiper)))
 
 (use-package magit)
 (use-package forge)
 
 (use-package projectile
-  :after general
+  :after (general ivy)
   :diminish projectile-mode
   :init
   (setq projectile-project-search-path '())
   (when (file-directory-p "~/dev") (push "~/dev" projectile-project-search-path))
   (when (file-directory-p "~/work") (push "~/work" projectile-project-search-path))
+
+  (setq projectile-completion-system 'ivy)
 
   :config
   (projectile-mode 1)
@@ -184,7 +195,7 @@
   (defun cjc/org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
                         ; TODO: rename this when the config is ready
-                        (expand-file-name "~/dev/dotfiles/emacs/init.org"))
+                        (expand-file-name "~/.emacs.d/Emacs.org"))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
   
