@@ -311,7 +311,43 @@ All sub-headings in this section are contained within the top level use-package.
         '("~/Google Drive/Org Notes/Tasks.org"
           "~/Google Drive/Org Notes/Birthdays.org")
         org-todo-keywords
-        '(("TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
+        '(("TODO(t)" "NEXT(n)" "|" "DONE(d!)" "CANCELLED(C@)")))
+
+  (setq org-refile-targets
+    '(("Archive.org" :maxlevel . 1)
+      ("Tasks.org" :maxlevel . 1)))
+
+  ; save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
+
+  ; configure custom agenda views
+  (setq org-agenda-custom-commands
+   '(("d" "Dashboard"
+     ((agenda "" ((org-deadline-warning-days 7)))
+      (todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))
+      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+    ("n" "Next Tasks"
+     ((todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))))
+
+    ("h" "Home Tasks" tags-todo "+work")
+    ("w" "Work Tasks" tags-todo "+home")
+    ("m" "Work Tasks" tags-todo "+media")))
+
+  ; default tags
+  (setq org-tag-alist
+    '((:startgroup)
+      (:endgroup)
+      ("home" . ?H)
+      ("work" . ?W)
+      ("note" . ?N)
+      ("media" . ?M)))
 #+end_src
 
 *** Load Org Babel Languages
