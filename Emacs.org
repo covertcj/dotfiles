@@ -175,7 +175,8 @@ All sub-headings will be wrapped in ~with-eval-after-load~.
 #+begin_src emacs-lisp
     (cjc/leader-key
       "t" '(:ignore t :which-key "toggle settings")
-      "tf" '(hydra-scale-text/body :which-key "font scaling"))
+      "tf" '(hydra-scale-text/body :which-key "font scaling")
+      "tt" '(counsel-load-theme :which-key "theme"))
 #+end_src
 
 *** End with-eval-after-load

@@ -106,7 +106,8 @@
 
 (cjc/leader-key
   "t" '(:ignore t :which-key "toggle settings")
-  "tf" '(hydra-scale-text/body :which-key "font scaling"))
+  "tf" '(hydra-scale-text/body :which-key "font scaling")
+  "tt" '(counsel-load-theme :which-key "theme"))
 
 ))
 
