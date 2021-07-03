@@ -148,8 +148,18 @@
   :after ivy
   :bind (("C-s" . swiper)))
 
-(use-package magit)
 (use-package forge)
+(use-package magit
+  :config
+  (cjc/leader-key
+   "g"  '(:ignore g :which-key "git")
+   "gs" '(magit-status :which-key "status")
+   "gb" '(magit-branch :which-key "branch")
+   "gc" '(magit-branch-or-checkout :which-key "branch or checkout")))
+
+(when (eq system-type 'windows-nt)
+  (setenv "SSH_ASKPASS" "git-gui--askpass")
+  (use-package ssh-agency))
 
 (use-package projectile
   :after (general ivy)

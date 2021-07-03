@@ -3,6 +3,10 @@
 
 Use ~M-x org-babel-tangle~ to export this file.
 
+* Installation
+
+- Install fonts with ~M-x all-the-icons-install-fonts~
+
 * Basic UI Configuration
 ** Basic Window Settings
 
@@ -244,8 +248,18 @@ These icons are required for ~doom-modeline~.
 ** Git
 
 #+begin_src emacs-lisp
-(use-package magit)
 (use-package forge)
+(use-package magit
+  :config
+  (cjc/leader-key
+   "g"  '(:ignore g :which-key "git")
+   "gs" '(magit-status :which-key "status")
+   "gb" '(magit-branch :which-key "branch")
+   "gc" '(magit-branch-or-checkout :which-key "branch or checkout")))
+
+(when (eq system-type 'windows-nt)
+  (setenv "SSH_ASKPASS" "git-gui--askpass")
+  (use-package ssh-agency))
 #+end_src
 
 ** Projectile
