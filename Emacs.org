@@ -462,3 +462,6 @@ All sub-headings in this section are contained within the top level use-package.
 Adds extra information to emacs help pages
 ** org-appear Package
 Dynamically shows/hides markup in org mode based on cursor position.
+
+** ivy-posframe
+Sticks ivy completion buffers into posframe popout windows
