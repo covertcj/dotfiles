@@ -308,6 +308,15 @@ These icons are required for ~doom-modeline~.
     "p" '(:keymap projectile-command-map :wk "projectile")))
 #+end_src
 
+* Terminals
+** Basic Settings
+#+begin_src emacs-lisp
+(defun cjc/all-term-mode-hook ()
+  (setq scroll-margin 0))
+
+(add-hook 'eshell-mode-hook 'cjc-all-term-mode-hook)
+#+end_src
+
 * Org Mode
 ** Org
 

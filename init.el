@@ -199,6 +199,11 @@
   (cjc/leader-key
     "p" '(:keymap projectile-command-map :wk "projectile")))
 
+(defun cjc/all-term-mode-hook ()
+  (setq scroll-margin 0))
+
+(add-hook 'eshell-mode-hook 'cjc-all-term-mode-hook)
+
 (use-package org
   :hook (org-mode . cjc/org-mode-setup)
   :config
