@@ -115,7 +115,8 @@
     (setq cjc/theme-index next-index)
     (condition-case nil
         (enable-theme next-theme)
-      (error (load-theme next-theme t)))))
+      (error (load-theme next-theme t)))
+    (cjc/org-setup-fonts)))
 
 (cjc/leader-key
   "t" '(:ignore t :which-key "toggle settings")
@@ -275,15 +276,16 @@
 (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
 (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 
-(dolist (face '((org-level-1 . 1.2)
-                (org-level-2 . 1.1)
-                (org-level-3 . 1.05)
-                (org-level-4 . 1.0)
-                (org-level-5 . 1.1)
-                (org-level-6 . 1.1)
-                (org-level-7 . 1.1)
-                (org-level-8 . 1.1)))
-  (set-face-attribute (car face) nil :font "Roboto" :weight 'regular :height (cdr face)))
+(defun cjc/org-setup-fonts ()
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil :font "Roboto" :weight 'regular :height (cdr face)))
 
   ; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -294,7 +296,8 @@
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
+  (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+(cjc/org-setup-fonts)
 
 (defun cjc/org-toggle-emphasis ()
   "Toggle hiding/showing of org emphasize markers."

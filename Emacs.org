@@ -173,18 +173,19 @@ All sub-headings will be wrapped in ~with-eval-after-load~.
 **** Theme Toggling
 
 #+begin_src emacs-lisp
-    (defun cjc/toggle-themes ()
-      "Switches between a list of themes"
-      (interactive)
-      (let* ((current-theme (nth cjc/theme-index cjc/theme-list))
-             (next-index (mod (+ cjc/theme-index 1) (length cjc/theme-list)))
-             (next-theme (nth next-index cjc/theme-list)))
-        (disable-theme current-theme)
-        (message "Theme: %s" next-theme)
-        (setq cjc/theme-index next-index)
-        (condition-case nil
-            (enable-theme next-theme)
-          (error (load-theme next-theme t)))))
+      (defun cjc/toggle-themes ()
+        "Switches between a list of themes"
+        (interactive)
+        (let* ((current-theme (nth cjc/theme-index cjc/theme-list))
+               (next-index (mod (+ cjc/theme-index 1) (length cjc/theme-list)))
+               (next-theme (nth next-index cjc/theme-list)))
+          (disable-theme current-theme)
+          (message "Theme: %s" next-theme)
+          (setq cjc/theme-index next-index)
+          (condition-case nil
+              (enable-theme next-theme)
+            (error (load-theme next-theme t)))
+          (cjc/org-setup-fonts)))
 #+end_src
 
 **** Leader Binds
@@ -414,15 +415,16 @@ All sub-headings in this section are contained within the top level use-package.
 *** Fonts
 
 #+begin_src emacs-lisp
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.1)
-                  (org-level-3 . 1.05)
-                  (org-level-4 . 1.0)
-                  (org-level-5 . 1.1)
-                  (org-level-6 . 1.1)
-                  (org-level-7 . 1.1)
-                  (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Roboto" :weight 'regular :height (cdr face)))
+  (defun cjc/org-setup-fonts ()
+    (dolist (face '((org-level-1 . 1.2)
+                    (org-level-2 . 1.1)
+                    (org-level-3 . 1.05)
+                    (org-level-4 . 1.0)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+        (set-face-attribute (car face) nil :font "Roboto" :weight 'regular :height (cdr face)))
 
     ; Ensure that anything that should be fixed-pitch in Org files appears that way
     (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -433,7 +435,8 @@ All sub-headings in this section are contained within the top level use-package.
     (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
     (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
     (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
-    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch)
+    (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+  (cjc/org-setup-fonts)
 #+end_src
 
 *** Helper Functions
