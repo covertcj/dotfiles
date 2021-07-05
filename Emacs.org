@@ -170,13 +170,31 @@ All sub-headings will be wrapped in ~with-eval-after-load~.
       ("f" nil "finished" :exit t))
 #+end_src
 
+**** Theme Toggling
+
+#+begin_src emacs-lisp
+    (defun cjc/toggle-themes ()
+      "Switches between a list of themes"
+      (interactive)
+      (let* ((current-theme (nth cjc/theme-index cjc/theme-list))
+             (next-index (mod (+ cjc/theme-index 1) (length cjc/theme-list)))
+             (next-theme (nth next-index cjc/theme-list)))
+        (disable-theme current-theme)
+        (message "Theme: %s" next-theme)
+        (setq cjc/theme-index next-index)
+        (condition-case nil
+            (enable-theme next-theme)
+          (error (load-theme next-theme t)))))
+#+end_src
+
 **** Leader Binds
 
 #+begin_src emacs-lisp
     (cjc/leader-key
       "t" '(:ignore t :which-key "toggle settings")
       "tf" '(hydra-scale-text/body :which-key "font scaling")
-      "tt" '(counsel-load-theme :which-key "theme"))
+      "tt" '(cjc/toggle-themes :which-key "theme")
+      "tT" '(counsel-load-theme :which-key "theme"))
 #+end_src
 
 *** End with-eval-after-load
@@ -203,12 +221,19 @@ These icons are required for ~doom-modeline~.
 ** Doom Themes
 
 #+begin_src emacs-lisp
+;(setq cjc/default-dark-theme 'doom-palenight)
+(setq cjc/default-dark-theme 'doom-challenger-deep)
+(setq cjc/default-light-theme 'doom-solarized-light)
+(setq cjc/theme-list
+  (list cjc/default-dark-theme
+        cjc/default-light-theme))
+(setq cjc/theme-index 0)
+
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold nil
 	doom-themes-enable-italic nil)
-  ;(load-theme 'doom-challenger-deep t)
-  (load-theme 'doom-palenight t)
+  (load-theme (car cjc/theme-list) t)
   (doom-themes-org-config))
 #+end_src
 

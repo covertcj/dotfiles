@@ -104,10 +104,24 @@
   ("k" text-scale-decrease "out")
   ("f" nil "finished" :exit t))
 
+(defun cjc/toggle-themes ()
+  "Switches between a list of themes"
+  (interactive)
+  (let* ((current-theme (nth cjc/theme-index cjc/theme-list))
+         (next-index (mod (+ cjc/theme-index 1) (length cjc/theme-list)))
+         (next-theme (nth next-index cjc/theme-list)))
+    (disable-theme current-theme)
+    (message "Theme: %s" next-theme)
+    (setq cjc/theme-index next-index)
+    (condition-case nil
+        (enable-theme next-theme)
+      (error (load-theme next-theme t)))))
+
 (cjc/leader-key
   "t" '(:ignore t :which-key "toggle settings")
   "tf" '(hydra-scale-text/body :which-key "font scaling")
-  "tt" '(counsel-load-theme :which-key "theme"))
+  "tt" '(cjc/toggle-themes :which-key "theme")
+  "tT" '(counsel-load-theme :which-key "theme"))
 
 ))
 
@@ -116,12 +130,19 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
 
+;(setq cjc/default-dark-theme 'doom-palenight)
+(setq cjc/default-dark-theme 'doom-challenger-deep)
+(setq cjc/default-light-theme 'doom-solarized-light)
+(setq cjc/theme-list
+  (list cjc/default-dark-theme
+        cjc/default-light-theme))
+(setq cjc/theme-index 0)
+
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold nil
 	doom-themes-enable-italic nil)
-  ;(load-theme 'doom-challenger-deep t)
-  (load-theme 'doom-palenight t)
+  (load-theme (car cjc/theme-list) t)
   (doom-themes-org-config))
 
 (use-package rainbow-delimiters
