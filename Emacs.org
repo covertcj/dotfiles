@@ -467,5 +467,8 @@ Dynamically shows/hides markup in org mode based on cursor position.
 ** ivy-posframe
 Sticks ivy completion buffers into posframe popout windows
 
+** ivy-rich
+Already installed, but make sure it's doing doing something and check out advanced config
+
 ** smart-modeline
 Alternative to doom-modeline
