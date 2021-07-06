@@ -43,7 +43,7 @@ Use ~M-x org-babel-tangle~ to export this file.
 
 ; disable line numbers for certain modes
 (dolist (mode '(term-mode-hook
-		eshell-mode-hook))
+                eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
@@ -308,6 +308,38 @@ These icons are required for ~doom-modeline~.
     "p" '(:keymap projectile-command-map :wk "projectile")))
 #+end_src
 
+** LSP
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :config
+  (cjc/leader-key lsp-command-map
+    "l" '(:keymap lsp-command-map :wk "lsp"))
+  (lsp-enable-which-key-integration t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode))
+#+end_src
+
+** Company
+
+#+begin_src emacs-lisp
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+          ("<tab>" . company-complete-selection))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.1))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+#+end_src
+
 * Terminals
 ** Basic Settings
 #+begin_src emacs-lisp
@@ -403,7 +435,6 @@ All sub-headings in this section are contained within the top level use-package.
 ;; Automatically Tangle Configuration ;;
   (defun cjc/org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
-                        ; TODO: rename this when the config is ready
                         (expand-file-name "~/.emacs.d/Emacs.org"))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
@@ -509,3 +540,6 @@ Already installed, but make sure it's doing doing something and check out advanc
 
 ** smart-modeline
 Alternative to doom-modeline
+
+** TODO highlighting
+Find a package for it

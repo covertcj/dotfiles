@@ -26,7 +26,7 @@
 
 ; disable line numbers for certain modes
 (dolist (mode '(term-mode-hook
-		eshell-mode-hook))
+                eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Fonts ;;
@@ -199,6 +199,30 @@
   (cjc/leader-key
     "p" '(:keymap projectile-command-map :wk "projectile")))
 
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :config
+  (cjc/leader-key lsp-command-map
+    "l" '(:keymap lsp-command-map :wk "lsp"))
+  (lsp-enable-which-key-integration t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode))
+
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+          ("<tab>" . company-complete-selection))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.1))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
 (defun cjc/all-term-mode-hook ()
   (setq scroll-margin 0))
 
@@ -268,7 +292,6 @@
 ;; Automatically Tangle Configuration ;;
   (defun cjc/org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
-                        ; TODO: rename this when the config is ready
                         (expand-file-name "~/.emacs.d/Emacs.org"))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
