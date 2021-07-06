@@ -204,7 +204,7 @@
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :config
-  (cjc/leader-key lsp-command-map
+  (cjc/leader-key
     "l" '(:keymap lsp-command-map :wk "lsp"))
   (lsp-enable-which-key-integration t))
 
@@ -224,6 +224,12 @@
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
+
+(use-package typescript-mode
+  :mode "\\.tsx?\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 2))
 
 (defun cjc/all-term-mode-hook ()
   (setq scroll-margin 0))
