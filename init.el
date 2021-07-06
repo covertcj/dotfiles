@@ -16,6 +16,8 @@
 (setq scroll-margin 8)
 (setq scroll-conservatively 1)
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; Line Numbers ;;
 ; relative line numbers everywhere
 (global-display-line-numbers-mode t)

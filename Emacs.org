@@ -28,6 +28,8 @@ Use ~M-x org-babel-tangle~ to export this file.
 ; keep the cursor away from the edge, and don't jump around when scrolling
 (setq scroll-margin 8)
 (setq scroll-conservatively 1)
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
 
 ** Line Numbers
