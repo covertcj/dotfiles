@@ -1,5 +1,5 @@
 #+title Emacs Configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
+#+PROPERTY: header-args:emacs-lisp :tangle ./.emacs.d/init.el
 
 Use ~M-x org-babel-tangle~ to export this file.
 
@@ -458,7 +458,7 @@ All sub-headings in this section are contained within the top level use-package.
 ;; Automatically Tangle Configuration ;;
   (defun cjc/org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
-                        (expand-file-name "~/.emacs.d/Emacs.org"))
+                        (expand-file-name "~/dev/dotfiles/Emacs.org"))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
   

@@ -310,7 +310,7 @@
 ;; Automatically Tangle Configuration ;;
   (defun cjc/org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
-                        (expand-file-name "~/.emacs.d/Emacs.org"))
+                        (expand-file-name "~/dev/dotfiles/Emacs.org"))
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
   
