@@ -57,7 +57,7 @@
 ; change the directory that most projects use for temporary/cache files
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
 (when (not (file-directory-p user-emacs-directory))
-  (make-directory user-emacs-directory))
+  (make-directory user-emacs-directory t))
 
 ; don't create lockfiles for modified files
 (setq create-lockfiles nil)
