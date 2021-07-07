@@ -54,6 +54,23 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+; change the directory that most projects use for temporary/cache files
+(setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
+(when (not (file-directory-p user-emacs-directory))
+  (make-directory user-emacs-directory))
+
+; don't create lockfiles for modified files
+(setq create-lockfiles nil)
+
+; changes the default locations of temp/cache files for common packages
+(use-package no-littering
+  :config
+  ; put auto-save files into the no-littering area
+  (setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  ; don't put customizations into ~init.el~
+  (setq custom-file (no-littering-expand-etc-file-name "custom.el")))
+
 ;; Basic Keybindings ;;
 ; let ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
