@@ -1,17 +1,4 @@
-# -*- mode: gitignore; -*-
-
 *~
 \#*\#
-/.emacs.desktop
-/.emacs.desktop.lock
-*.elc
-*.sqlite
 
-projectile-bookmarks.eld
-projectile.cache
-
-/auto-save-list/
-/elpa/
-/server/
-/transient/
-/.lsp-session-v1
+.DS_Store
