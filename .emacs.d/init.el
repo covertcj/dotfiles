@@ -62,7 +62,8 @@
   :config
   (general-evil-setup)
   (general-create-definer cjc/leader-key
-    :states 'normal
+    :states '(normal visual emacs motion)
+    :keymaps 'override
     :prefix "SPC"
     :non-normal-prefix "C-SPC"))
 

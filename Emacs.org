@@ -102,7 +102,8 @@ Use ~M-x org-babel-tangle~ to export this file.
   :config
   (general-evil-setup)
   (general-create-definer cjc/leader-key
-    :states 'normal
+    :states '(normal visual emacs motion)
+    :keymaps 'override
     :prefix "SPC"
     :non-normal-prefix "C-SPC"))
 #+end_src
