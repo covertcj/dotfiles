@@ -137,8 +137,7 @@
     (setq cjc/theme-index next-index)
     (condition-case nil
         (enable-theme next-theme)
-      (error (load-theme next-theme t)))
-    (cjc/org-setup-fonts)))
+      (error (load-theme next-theme t)))))
 
 (cjc/leader-key
   "t" '(:ignore t :which-key "toggle settings")
@@ -147,6 +146,17 @@
   "tT" '(counsel-load-theme :which-key "theme"))
 
 ))
+
+(defvar after-change-theme-hook nil
+  "Hook run after a color theme is loaded using `load-theme' or `enable-theme'.")
+
+(defadvice load-theme (after run-after-change-theme-hook activate)
+  "Run `after-change-theme-hook'."
+  (run-hooks 'after-change-theme-hook))
+
+(defadvice enable-theme (after run-after-change-theme-hook activate)
+  "Run `after-change-theme-hook'."
+  (run-hooks 'after-change-theme-hook))
 
 (use-package all-the-icons)
 
@@ -170,6 +180,21 @@
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package hl-todo
+  :config
+  (defun cjc/hl-todo-setup-theme ()
+    (setq hl-todo-keyword-faces
+      '(("TODO" . (face-foreground 'font-lock-keyword-face))
+        ("FIXME" . (face-foreground 'font-lock-keyword-face))))
+    (when (or (bound-and-true-p hl-todo-mode)
+              (bound-and-true-p global-hl-todo-mode))
+      (hl-todo-mode)))
+
+  (cjc/hl-todo-setup-theme)
+  (add-hook 'after-change-theme-hook #'cjc/hl-todo-setup-theme t)
+
+  (global-hl-todo-mode))
 
 (use-package ivy
   :diminish
@@ -388,6 +413,8 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number nil :inherit 'fixed-pitch)
   (set-face-attribute 'line-number-current-line nil :inherit 'fixed-pitch))
+
+(add-hook 'after-change-theme-hook #'cjc/org-setup-fonts t)
 (cjc/org-setup-fonts)
 
 (defun cjc/org-toggle-emphasis ()
