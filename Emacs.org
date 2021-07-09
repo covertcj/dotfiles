@@ -346,6 +346,10 @@ These icons are required for ~doom-modeline~.
   (projectile-mode 1)
   (cjc/leader-key
     "p" '(:keymap projectile-command-map :wk "projectile")))
+
+(use-package counsel-projectile
+  :after projectile
+  :config (counsel-projectile-mode))
 #+end_src
 
 ** LSP

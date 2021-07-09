@@ -234,6 +234,10 @@
   (cjc/leader-key
     "p" '(:keymap projectile-command-map :wk "projectile")))
 
+(use-package counsel-projectile
+  :after projectile
+  :config (counsel-projectile-mode))
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :config
