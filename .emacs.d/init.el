@@ -256,7 +256,7 @@
   :hook (company-mode . company-box-mode))
 
 (use-package typescript-mode
-  :mode "\\.tsx?\\'"
+  :mode "\\.[jt]sx?\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
