@@ -176,7 +176,10 @@
   :bind (:map ivy-minibuffer-map
               ("TAB" . ivy-alt-done)
               ("C-j" . ivy-next-line)
-              ("C-k" . ivy-previous-line))
+              ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+              ("C-k" . ivy-previous-line)
+              ("M-k" . ivy-switch-buffer-kill))
   :config
   (ivy-mode 1))
 
