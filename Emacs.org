@@ -339,13 +339,8 @@ These icons are required for ~doom-modeline~.
 
 (use-package ivy-posframe
   :config
-  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
   (ivy-posframe-mode 1))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
 #+end_src
 
 ** Git
@@ -430,6 +425,7 @@ These icons are required for ~doom-modeline~.
   :config
   (setq typescript-indent-level 2))
 #+end_src
+
 * Other Packages
 ** Helpful
 
