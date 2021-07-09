@@ -264,6 +264,24 @@
   :config
   (setq typescript-indent-level 2))
 
+(use-package helpful
+  :commands (helpful-callable helpful-variable helpful-command helpful-key)
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key)
+  :init
+  (cjc/leader-key
+     "h"  '(:ignore h :which-key "help")
+     "hf" '(counsel-describe-function :which-key "functions")
+     "hv" '(counsel-describe-variable :which-key "variables")
+     "hc" '(helpful-command :which-key "commands")
+     "hk" '(helpful-key :which-key "keys")))
+
 (defun cjc/all-term-mode-hook ()
   (setq scroll-margin 0))
 
