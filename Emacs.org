@@ -180,7 +180,9 @@ All sub-headings will be wrapped in ~with-eval-after-load~.
 #+begin_src emacs-lisp
     (cjc/leader-key
      "b"  '(:ignore b :which-key "buffers")
-     "bb" '(counsel-switch-buffer :which-key "switch buffers"))
+     "bb" '(counsel-switch-buffer :which-key "switch buffers")
+     "bk" '(kill-current-buffer :which-key "kill current buffer")
+     "bK" '(kill-buffer :which-key "kill buffer"))
 #+end_src
 
 *** Settings Toggles

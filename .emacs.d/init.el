@@ -116,7 +116,9 @@
 
 (cjc/leader-key
  "b"  '(:ignore b :which-key "buffers")
- "bb" '(counsel-switch-buffer :which-key "switch buffers"))
+ "bb" '(counsel-switch-buffer :which-key "switch buffers")
+ "bk" '(kill-current-buffer :which-key "kill current buffer")
+ "bK" '(kill-buffer :which-key "kill buffer"))
 
 (defhydra hydra-scale-text (:timeout 6)
   "scale editor text"
