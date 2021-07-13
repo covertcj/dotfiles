@@ -1,3 +1,26 @@
+;; Font Settings
+(defvar cjc/default-font-mono "Roboto Mono")
+(defvar cjc/default-font-variable "Roboto")
+(defvar cjc/default-font-height 150)
+
+;; Theme Settings
+(defvar cjc/default-dark-theme 'doom-challenger-deep)
+(defvar cjc/default-light-theme 'doom-solarized-light)
+
+;; Org Settings
+(defvar cjc/default-org-notes-dir "~/org")
+
+(defvar cjc/host (substring (shell-command-to-string "hostname") 0 -1))
+(defvar cjc/hosts-dir "~/.emacs.d/hosts/")
+(defvar cjc/host-init-file (concat cjc/hosts-dir cjc/host ".el"))
+(defvar cjc/private-init-file "~/.emacs.d/priv.el")
+
+(when (file-exists-p cjc/host-init-file)
+  (load cjc/host-init-file))
+
+(when (file-exists-p cjc/private-init-file)
+  (load cjc/private-init-file))
+
 ;; Basic Window Settings ;;
 (setq inhibit-startup-message t)
 
@@ -32,18 +55,6 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Fonts ;;
-(setq cjc/default-font-mono 
-  (if (eq system-type 'windows-nt)
-    "CozetteVector"
-    "Roboto Mono"))
-
-(setq cjc/default-font-variable "Roboto")
-
-(setq cjc/default-font-height
-  (if (eq system-type 'windows-nt)
-    140
-    150))
-
 (set-face-attribute 'default nil :font cjc/default-font-mono :height cjc/default-font-height)
 (set-face-attribute 'fixed-pitch nil :font cjc/default-font-mono :height cjc/default-font-height)
 (set-face-attribute 'variable-pitch nil :font cjc/default-font-variable :height cjc/default-font-height)
@@ -174,9 +185,6 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
 
-;(setq cjc/default-dark-theme 'doom-palenight)
-(setq cjc/default-dark-theme 'doom-challenger-deep)
-(setq cjc/default-light-theme 'doom-solarized-light)
 (setq cjc/theme-list
   (list cjc/default-dark-theme
         cjc/default-light-theme))
@@ -335,9 +343,9 @@
       org-log-done 'time
       org-log-into-drawer t
       org-agenda-files
-      '("~/Google Drive/Org Notes/001 Backlog.org"
-        "~/Google Drive/Org Notes/002 Calendar.org"
-        "~/Google Drive/Org Notes/003 Archive.org")
+      (list (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
+            (concat (file-name-as-directory cjc/default-org-notes-dir) "002 Calendar.org")
+            (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org"))
       org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "WAIT(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
