@@ -32,10 +32,17 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Fonts ;;
-(setq cjc/default-font-height 160)
-(set-face-attribute 'default nil :font "Roboto Mono" :height cjc/default-font-height)
-(set-face-attribute 'fixed-pitch nil :font "Roboto Mono" :height cjc/default-font-height)
-(set-face-attribute 'variable-pitch nil :font "Roboto" :height cjc/default-font-height)
+(setq cjc/default-font-mono 
+  (if (eq system-type 'windows-nt)
+    "CozetteVector"
+    "cozette"))
+
+(setq cjc/default-font-variable "Roboto");"Roboto Mono")
+
+(setq cjc/default-font-height 140)
+(set-face-attribute 'default nil :font cjc/default-font-mono :height cjc/default-font-height)
+(set-face-attribute 'fixed-pitch nil :font cjc/default-font-mono :height cjc/default-font-height)
+(set-face-attribute 'variable-pitch nil :font cjc/default-font-variable :height cjc/default-font-height)
 
 ;; Setup Package Archives
 (require 'package)
