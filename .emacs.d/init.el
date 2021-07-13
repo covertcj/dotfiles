@@ -331,14 +331,14 @@
       org-log-done 'time
       org-log-into-drawer t
       org-agenda-files
-      '("~/Google Drive/Org Notes/Tasks.org"
-        "~/Google Drive/Org Notes/Birthdays.org")
+      '("~/Google Drive/Org Notes/001 Backlog.org"
+        "~/Google Drive/Org Notes/002 Calendar.org"
+        "~/Google Drive/Org Notes/003 Archive.org")
       org-todo-keywords
-      '(("TODO(t)" "NEXT(n)" "|" "DONE(d!)" "CANCELLED(C@)")))
+      '((sequence "TODO(t)" "NEXT(n)" "WAIT(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
 (setq org-refile-targets
-  '(("Archive.org" :maxlevel . 1)
-    ("Tasks.org" :maxlevel . 1)))
+  '(("003 Archive.org" :maxlevel . 1)))
 
 ; save Org buffers after refiling!
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -350,7 +350,8 @@
 ; configure custom agenda views
 (setq org-agenda-custom-commands
  '(("d" "Dashboard"
-   ((agenda "" ((org-deadline-warning-days 7)))
+   ((agenda "STYLE<>\"habit\"" ((org-deadline-warning-days 7)))
+    (todo "TODO+STYLE=\"habit\"" ((org-agenda-overriding-header "Habits")))
     (todo "NEXT"
       ((org-agenda-overriding-header "Next Tasks")))
     (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
@@ -361,16 +362,17 @@
 
   ("h" "Home Tasks" tags-todo "+work")
   ("w" "Work Tasks" tags-todo "+home")
-  ("m" "Work Tasks" tags-todo "+media")))
+  ("m" "Media" tags-todo "+media")))
 
 ; default tags
 (setq org-tag-alist
   '((:startgroup)
+    ("home" . ?h)
+    ("work" . ?w)
+    ("play" . ?p)
     (:endgroup)
-    ("home" . ?H)
-    ("work" . ?W)
-    ("note" . ?N)
-    ("media" . ?M)))
+    ("note" . ?n)
+    ("media" . ?m)))
 
 ;; Load Org Babel Languages ;;
 (org-babel-do-load-languages
