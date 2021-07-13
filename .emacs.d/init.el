@@ -35,11 +35,15 @@
 (setq cjc/default-font-mono 
   (if (eq system-type 'windows-nt)
     "CozetteVector"
-    "cozette"))
+    "Roboto Mono"))
 
-(setq cjc/default-font-variable "Roboto");"Roboto Mono")
+(setq cjc/default-font-variable "Roboto")
 
-(setq cjc/default-font-height 140)
+(setq cjc/default-font-height
+  (if (eq system-type 'windows-nt)
+    140
+    150))
+
 (set-face-attribute 'default nil :font cjc/default-font-mono :height cjc/default-font-height)
 (set-face-attribute 'fixed-pitch nil :font cjc/default-font-mono :height cjc/default-font-height)
 (set-face-attribute 'variable-pitch nil :font cjc/default-font-variable :height cjc/default-font-height)
