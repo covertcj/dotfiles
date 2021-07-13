@@ -21,7 +21,7 @@ These are the variables that are expected to be overwritten by system local sett
 (defvar cjc/default-light-theme 'doom-solarized-light)
 
 ;; Org Settings
-(defvar cjc/default-org-notes-dir "~/org")
+(defvar cjc/default-org-notes-dir (expand-file-name "~/org"))
 #+end_src
 
 ** Systems
@@ -37,7 +37,7 @@ These are the variables that are expected to be overwritten by system local sett
 (setq cjc/default-light-theme 'doom-solarized-light)
 
 ;; Org Settings
-(setq cjc/default-org-notes-dir "~/org")
+(setq cjc/default-org-notes-dir (expand-file-name "~/org"))
 #+end_src
 
 ** Load Local Config
@@ -512,7 +512,18 @@ These icons are required for ~doom-modeline~.
 All sub-headings in this section are contained within the top level use-package.
 
 #+begin_src emacs-lisp
+(setq cjc/org-backlog-file (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
+      cjc/org-calendar-file (concat (file-name-as-directory cjc/default-org-notes-dir) "002 Calendar.org")
+      cjc/org-archive-file (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org")
+      cjc/org-contacts-file (concat (file-name-as-directory cjc/default-org-notes-dir) "004 Contacts.org"))
+
+(use-package org-contacts
+  :ensure nil
+  :after org
+  :custom (org-contacts-files (list cjc/org-contacts-file)))
+
 (use-package org
+  :ensure org-plus-contrib
   :hook (org-mode . cjc/org-mode-setup)
   :config
 #+end_src
@@ -533,14 +544,15 @@ All sub-headings in this section are contained within the top level use-package.
         org-log-done 'time
         org-log-into-drawer t
         org-agenda-files
-        (list (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
-              (concat (file-name-as-directory cjc/default-org-notes-dir) "002 Calendar.org")
-              (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org"))
+        (list cjc/org-backlog-file
+              cjc/org-calendar-file
+              cjc/org-archive-file
+              cjc/org-contacts-file)
         org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "WAIT(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
   (setq org-refile-targets
-    '(("003 Archive.org" :maxlevel . 1)))
+    '((cjc/org-archive-file :maxlevel . 1)))
 
   ; save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -575,6 +587,27 @@ All sub-headings in this section are contained within the top level use-package.
       (:endgroup)
       ("note" . ?n)
       ("media" . ?m)))
+#+end_src
+
+*** Capturing
+
+#+begin_src emacs-lisp
+  (defvar cjc/org-contacts-template "* %(org-contacts-template-name) %^g
+:PROPERTIES:
+:ADDRESS: %^{ADDRESS}
+:BIRTHDAY: %^{BIRTHDAY, yyyy-mm-dd}
+:EMAIL: %(org-contacts-template-email)
+:NOTE: %^{NOTE}
+:END:" "Template for org-contacts.")
+
+
+  (setq org-capture-templates
+    `(("t" "Todo" entry (file+headline ,cjc/org-backlog-file "Tasks")
+         "** TODO %?\n  %i\n  %a")
+      ("e" "Event" entry (file+headline ,cjc/org-calendar-file "Events")
+         "** %?\n %i\n  :SCHEDULED: %^T")
+      ("c" "Contact" entry (file cjc/org-contacts-file)
+         ,cjc/org-contacts-template)))
 #+end_src
 
 *** Load Org Babel Languages

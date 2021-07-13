@@ -8,7 +8,7 @@
 (defvar cjc/default-light-theme 'doom-solarized-light)
 
 ;; Org Settings
-(defvar cjc/default-org-notes-dir "~/org")
+(defvar cjc/default-org-notes-dir (expand-file-name "~/org"))
 
 (defvar cjc/host (substring (shell-command-to-string "hostname") 0 -1))
 (defvar cjc/hosts-dir "~/.emacs.d/hosts/")
@@ -330,7 +330,18 @@
 
 (add-hook 'eshell-mode-hook 'cjc/all-term-mode-hook)
 
+(setq cjc/org-backlog-file (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
+      cjc/org-calendar-file (concat (file-name-as-directory cjc/default-org-notes-dir) "002 Calendar.org")
+      cjc/org-archive-file (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org")
+      cjc/org-contacts-file (concat (file-name-as-directory cjc/default-org-notes-dir) "004 Contacts.org"))
+
+(use-package org-contacts
+  :ensure nil
+  :after org
+  :custom (org-contacts-files (list cjc/org-contacts-file)))
+
 (use-package org
+  :ensure org-plus-contrib
   :hook (org-mode . cjc/org-mode-setup)
   :config
 
@@ -343,14 +354,15 @@
       org-log-done 'time
       org-log-into-drawer t
       org-agenda-files
-      (list (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
-            (concat (file-name-as-directory cjc/default-org-notes-dir) "002 Calendar.org")
-            (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org"))
+      (list cjc/org-backlog-file
+            cjc/org-calendar-file
+            cjc/org-archive-file
+            cjc/org-contacts-file)
       org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "WAIT(w@)" "|" "DONE(d!)" "CANCELLED(c@)")))
 
 (setq org-refile-targets
-  '(("003 Archive.org" :maxlevel . 1)))
+  '((cjc/org-archive-file :maxlevel . 1)))
 
 ; save Org buffers after refiling!
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -385,6 +397,23 @@
     (:endgroup)
     ("note" . ?n)
     ("media" . ?m)))
+
+(defvar cjc/org-contacts-template "* %(org-contacts-template-name) %^g
+:PROPERTIES:
+:ADDRESS: %^{ADDRESS}
+:BIRTHDAY: %^{BIRTHDAY, yyyy-mm-dd}
+:EMAIL: %(org-contacts-template-email)
+:NOTE: %^{NOTE}
+:END:" "Template for org-contacts.")
+
+
+  (setq org-capture-templates
+    `(("t" "Todo" entry (file+headline ,cjc/org-backlog-file "Tasks")
+         "** TODO %?\n  %i\n  %a")
+      ("e" "Event" entry (file+headline ,cjc/org-calendar-file "Events")
+         "** %?\n %i\n  :SCHEDULED: %^T")
+      ("c" "Contact" entry (file cjc/org-contacts-file)
+         ,cjc/org-contacts-template)))
 
 ;; Load Org Babel Languages ;;
 (org-babel-do-load-languages

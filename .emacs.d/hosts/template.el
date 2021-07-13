@@ -7,4 +7,4 @@
 (setq cjc/default-light-theme 'doom-solarized-light)
 
 ;; Org Settings
-(setq cjc/default-org-notes-dir "~/org")
+(setq cjc/default-org-notes-dir (expand-file-name "~/org"))
