@@ -40,6 +40,14 @@ These are the variables that are expected to be overwritten by system local sett
 (setq cjc/default-org-notes-dir (expand-file-name "~/org"))
 #+end_src
 
+** covertcj-laptop-msi
+
+#+begin_src emacs-lisp :tangle ./.emacs.d/hosts/covertcj-laptop-msi.el
+(setq cjc/default-font-mono "CozetteVector")
+(setq cjc/default-font-variable "Roboto")
+(setq cjc/default-font-height 140)
+#+end_src
+
 ** Load Local Config
 
 Loads 2 special configuration files:
