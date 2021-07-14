@@ -330,7 +330,8 @@
 
 (add-hook 'eshell-mode-hook 'cjc/all-term-mode-hook)
 
-(setq cjc/org-backlog-file (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
+(setq cjc/org-index-file (concat (file-name-as-directory cjc/default-org-notes-dir) "000 Index.org")
+      cjc/org-backlog-file (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
       cjc/org-calendar-file (concat (file-name-as-directory cjc/default-org-notes-dir) "002 Calendar.org")
       cjc/org-archive-file (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org")
       cjc/org-contacts-file (concat (file-name-as-directory cjc/default-org-notes-dir) "004 Contacts.org"))
@@ -479,18 +480,24 @@
 
 )
 
+(defun cjc/org-open-index-file ()
+  "Opens the index file from the org notes directory"
+  (interactive)
+  (find-file cjc/org-index-file))
+
 (cjc/leader-key
   :keymaps 'org-mode-map
   "m" '(:ignore t :which-key "org-mode")
   "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis"))
-
+  
 (cjc/leader-key
   "n" '(:ignore t :which-key "notes")
-  "nc" '(org-capture :which-key "capture"))
+  "nc" '(org-capture :which-key "capture")
+  "nn" '(cjc/org-open-index-file :which-key "open index"))
 
 (use-package org-superstar
   :after org
   :hook (org-mode . org-superstar-mode)
   :config
   (setq org-superstar-headline-bullets-list '("❖" "✱" "✹" "✸" "✦" "✧")
-	org-superstar-leading-bullet " "))
+        org-superstar-leading-bullet " "))

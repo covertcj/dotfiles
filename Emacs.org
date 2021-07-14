@@ -520,7 +520,8 @@ These icons are required for ~doom-modeline~.
 All sub-headings in this section are contained within the top level use-package.
 
 #+begin_src emacs-lisp
-(setq cjc/org-backlog-file (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
+(setq cjc/org-index-file (concat (file-name-as-directory cjc/default-org-notes-dir) "000 Index.org")
+      cjc/org-backlog-file (concat (file-name-as-directory cjc/default-org-notes-dir) "001 Backlog.org")
       cjc/org-calendar-file (concat (file-name-as-directory cjc/default-org-notes-dir) "002 Calendar.org")
       cjc/org-archive-file (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org")
       cjc/org-contacts-file (concat (file-name-as-directory cjc/default-org-notes-dir) "004 Contacts.org"))
@@ -710,15 +711,25 @@ All sub-headings in this section are contained within the top level use-package.
 
 *** Keybinds
 
+**** Helpers
+
+#+begin_src emacs-lisp
+(defun cjc/org-open-index-file ()
+  "Opens the index file from the org notes directory"
+  (interactive)
+  (find-file cjc/org-index-file))
+#+end_src
+  
 #+begin_src emacs-lisp
 (cjc/leader-key
   :keymaps 'org-mode-map
   "m" '(:ignore t :which-key "org-mode")
   "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis"))
-
+  
 (cjc/leader-key
   "n" '(:ignore t :which-key "notes")
-  "nc" '(org-capture :which-key "capture"))
+  "nc" '(org-capture :which-key "capture")
+  "nn" '(cjc/org-open-index-file :which-key "open index"))
 #+end_src
 
 ** Org Superstar
@@ -729,7 +740,7 @@ All sub-headings in this section are contained within the top level use-package.
   :hook (org-mode . org-superstar-mode)
   :config
   (setq org-superstar-headline-bullets-list '("❖" "✱" "✹" "✸" "✦" "✧")
-	org-superstar-leading-bullet " "))
+        org-superstar-leading-bullet " "))
 #+end_src
 
 * Things To Check Out
