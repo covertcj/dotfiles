@@ -477,12 +477,16 @@
   (visual-line-mode 1)
   (setq evil-auto-indent nil))
 
+)
+
 (cjc/leader-key
   :keymaps 'org-mode-map
   "m" '(:ignore t :which-key "org-mode")
   "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis"))
 
-)
+(cjc/leader-key
+  "n" '(:ignore t :which-key "notes")
+  "nc" '(org-capture :which-key "capture"))
 
 (use-package org-superstar
   :after org

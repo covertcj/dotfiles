@@ -702,19 +702,23 @@ All sub-headings in this section are contained within the top level use-package.
   (setq evil-auto-indent nil))
 #+end_src
 
-*** Keybinds
-
-#+begin_src emacs-lisp
-  (cjc/leader-key
-    :keymaps 'org-mode-map
-    "m" '(:ignore t :which-key "org-mode")
-    "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis"))
-#+end_src
-
 *** End use-package org
 
 #+begin_src emacs-lisp
 )
+#+end_src
+
+*** Keybinds
+
+#+begin_src emacs-lisp
+(cjc/leader-key
+  :keymaps 'org-mode-map
+  "m" '(:ignore t :which-key "org-mode")
+  "me" '(cjc/org-toggle-emphasis :which-key "toggle emphasis"))
+
+(cjc/leader-key
+  "n" '(:ignore t :which-key "notes")
+  "nc" '(org-capture :which-key "capture"))
 #+end_src
 
 ** Org Superstar
