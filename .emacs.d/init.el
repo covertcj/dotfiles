@@ -5,7 +5,7 @@
 
 ;; Theme Settings
 (defvar cjc/default-dark-theme 'doom-challenger-deep)
-(defvar cjc/default-light-theme 'doom-solarized-light)
+(defvar cjc/default-light-theme 'doom-tomorrow-day)
 
 ;; Org Settings
 (defvar cjc/default-org-notes-dir (expand-file-name "~/org"))
