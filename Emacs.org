@@ -11,17 +11,19 @@ Use ~M-x org-babel-tangle~ to export this file.
 These are the variables that are expected to be overwritten by system local settings.
 
 #+begin_src emacs-lisp
-;; Font Settings
-(defvar cjc/default-font-mono "Roboto Mono")
-(defvar cjc/default-font-variable "Roboto")
-(defvar cjc/default-font-height 150)
-
-;; Theme Settings
-(defvar cjc/default-dark-theme 'doom-challenger-deep)
-(defvar cjc/default-light-theme 'doom-tomorrow-day)
-
-;; Org Settings
-(defvar cjc/default-org-notes-dir (expand-file-name "~/org"))
+  ;; Font Settings
+  (defvar cjc/default-font-mono "Roboto Mono")
+  (defvar cjc/default-font-variable "Roboto")
+  (defvar cjc/default-font-height 150)
+  
+  ;; Theme Settings
+  (defvar cjc/default-dark-theme 'doom-challenger-deep)
+  (defvar cjc/default-light-theme 'doom-tomorrow-day)
+  
+  ;; Org Settings
+  (defvar cjc/default-org-notes-dir (expand-file-name "~/org/"))
+  (defvar cjc/default-dev-dir (expand-file-name "~/dev/dotfiles/"))
+  (defvar cjc/default-dotfiles-dir (concat cjc/default-dev-dir "dotfiles/"))
 #+end_src
 
 ** Systems
@@ -37,7 +39,7 @@ These are the variables that are expected to be overwritten by system local sett
 (setq cjc/default-light-theme 'doom-tomorrow-day)
 
 ;; Org Settings
-(setq cjc/default-org-notes-dir (expand-file-name "~/org"))
+(setq cjc/default-org-notes-dir (expand-file-name "~/org/"))
 #+end_src
 
 ** covertcj-laptop-msi
@@ -239,7 +241,7 @@ All sub-headings will be wrapped in ~with-eval-after-load~.
 
 #+begin_src emacs-lisp
     (cjc/leader-key
-     "b"  '(:ignore b :which-key "buffers")
+     "b"  '(:ignore t :which-key "buffers")
      "bb" '(counsel-switch-buffer :which-key "switch buffers")
      "bk" '(kill-current-buffer :which-key "kill current buffer")
      "bK" '(kill-buffer :which-key "kill buffer"))
@@ -281,6 +283,26 @@ All sub-headings will be wrapped in ~with-eval-after-load~.
       "tf" '(hydra-scale-text/body :which-key "font scaling")
       "tt" '(cjc/toggle-themes :which-key "theme")
       "tT" '(counsel-load-theme :which-key "theme"))
+#+end_src
+
+
+*** Opening Things
+
+**** Helpers
+
+#+begin_src emacs-lisp
+(defun cjc/org-open-emacs-org-file ()
+  "Opens the index file from the org notes directory"
+  (interactive)
+  (find-file (concat cjc/dotfiles-dir "Emacs.org")))
+#+end_src
+
+**** Leader Binds
+
+#+begin_src emacs-lisp
+    (cjc/leader-key
+      "o" '(:ignore t :which-key "open")
+      "oE" '(cjc/dotfiles-dir :which-key "emacs config"))
 #+end_src
 
 *** End with-eval-after-load
@@ -410,7 +432,7 @@ These icons are required for ~doom-modeline~.
 (use-package magit
   :config
   (cjc/leader-key
-   "g"  '(:ignore g :which-key "git")
+   "g"  '(:ignore t :which-key "git")
    "gs" '(magit-status :which-key "status")
    "gb" '(magit-branch :which-key "branch")
    "gc" '(magit-branch-or-checkout :which-key "branch or checkout")))
@@ -502,7 +524,7 @@ These icons are required for ~doom-modeline~.
   ([remap describe-key] . helpful-key)
   :init
   (cjc/leader-key
-     "h"  '(:ignore h :which-key "help")
+     "h"  '(:ignore t :which-key "help")
      "hf" '(counsel-describe-function :which-key "functions")
      "hv" '(counsel-describe-variable :which-key "variables")
      "hc" '(helpful-command :which-key "commands")

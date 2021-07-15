@@ -8,7 +8,9 @@
 (defvar cjc/default-light-theme 'doom-tomorrow-day)
 
 ;; Org Settings
-(defvar cjc/default-org-notes-dir (expand-file-name "~/org"))
+(defvar cjc/default-org-notes-dir (expand-file-name "~/org/"))
+(defvar cjc/default-dev-dir (expand-file-name "~/dev/dotfiles/"))
+(defvar cjc/default-dotfiles-dir (concat cjc/default-dev-dir "dotfiles/"))
 
 (defvar cjc/host (substring (shell-command-to-string "hostname") 0 -1))
 (defvar cjc/hosts-dir "~/.emacs.d/hosts/")
@@ -137,7 +139,7 @@
   (with-eval-after-load 'hydra
 
 (cjc/leader-key
- "b"  '(:ignore b :which-key "buffers")
+ "b"  '(:ignore t :which-key "buffers")
  "bb" '(counsel-switch-buffer :which-key "switch buffers")
  "bk" '(kill-current-buffer :which-key "kill current buffer")
  "bK" '(kill-buffer :which-key "kill buffer"))
@@ -166,6 +168,15 @@
   "tf" '(hydra-scale-text/body :which-key "font scaling")
   "tt" '(cjc/toggle-themes :which-key "theme")
   "tT" '(counsel-load-theme :which-key "theme"))
+
+(defun cjc/org-open-emacs-org-file ()
+  "Opens the index file from the org notes directory"
+  (interactive)
+  (find-file (concat cjc/dotfiles-dir "Emacs.org")))
+
+(cjc/leader-key
+  "o" '(:ignore t :which-key "open")
+  "oE" '(cjc/dotfiles-dir :which-key "emacs config"))
 
 ))
 
@@ -253,7 +264,7 @@
 (use-package magit
   :config
   (cjc/leader-key
-   "g"  '(:ignore g :which-key "git")
+   "g"  '(:ignore t :which-key "git")
    "gs" '(magit-status :which-key "status")
    "gb" '(magit-branch :which-key "branch")
    "gc" '(magit-branch-or-checkout :which-key "branch or checkout")))
@@ -323,7 +334,7 @@
   ([remap describe-key] . helpful-key)
   :init
   (cjc/leader-key
-     "h"  '(:ignore h :which-key "help")
+     "h"  '(:ignore t :which-key "help")
      "hf" '(counsel-describe-function :which-key "functions")
      "hv" '(counsel-describe-variable :which-key "variables")
      "hc" '(helpful-command :which-key "commands")
