@@ -225,6 +225,7 @@
               ("C-k" . ivy-previous-line)
               ("M-k" . ivy-switch-buffer-kill))
   :config
+  (setq ivy-on-del-error-function #'ignore)
   (ivy-mode 1))
 
 (use-package counsel
@@ -244,6 +245,9 @@
   :config
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
   (ivy-posframe-mode 1))
+
+(use-package all-the-icons-ivy
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
 
 (use-package forge)
 (use-package magit
@@ -336,6 +340,8 @@
       cjc/org-archive-file (concat (file-name-as-directory cjc/default-org-notes-dir) "003 Archive.org")
       cjc/org-contacts-file (concat (file-name-as-directory cjc/default-org-notes-dir) "004 Contacts.org"))
 
+(setq org-directory cjc/default-org-notes-dir)
+
 (use-package org-contacts
   :ensure nil
   :after org
@@ -349,6 +355,10 @@
 ;; Basic Settings ;;
 (setq org-ellipsis " ▾"
       org-hide-emphasis-markers t)
+
+(with-eval-after-load 'evil
+    (evil-define-key '(normal visual) outline-mode-map (kbd "<tab>") #'org-cycle)
+    (evil-define-key '(normal visual) outline-mode-map (kbd "TAB") #'org-cycle))
 
 ;; Agenda Settings ;;
 (setq org-agenda-start-with-log-mode t
@@ -373,21 +383,21 @@
 (setq org-habit-graph-column 60)
 
 ; configure custom agenda views
-(setq org-agenda-custom-commands
- '(("d" "Dashboard"
-   ((agenda "STYLE<>\"habit\"" ((org-deadline-warning-days 7)))
-    (todo "TODO+STYLE=\"habit\"" ((org-agenda-overriding-header "Habits")))
-    (todo "NEXT"
-      ((org-agenda-overriding-header "Next Tasks")))
-    (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+;(setq org-agenda-custom-commands
+; '(("d" "Dashboard"
+;   ((agenda "" ((org-deadline-warning-days 7)))
+;    (todo "TODO+STYLE=\"habit\"" ((org-agenda-overriding-header "Habits")))
+;    (todo "NEXT"
+;      ((org-agenda-overriding-header "Next Tasks")))
+;    (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
 
-  ("n" "Next Tasks"
-   ((todo "NEXT"
-      ((org-agenda-overriding-header "Next Tasks")))))
+;  ("n" "Next Tasks"
+;   ((todo "NEXT"
+;      ((org-agenda-overriding-header "Next Tasks")))))
 
-  ("h" "Home Tasks" tags-todo "+work")
-  ("w" "Work Tasks" tags-todo "+home")
-  ("m" "Media" tags-todo "+media")))
+;  ("h" "Home Tasks" tags-todo "+work")
+;  ("w" "Work Tasks" tags-todo "+home")
+;  ("m" "Media" tags-todo "+media")))
 
 ; default tags
 (setq org-tag-alist
@@ -493,7 +503,8 @@
 (cjc/leader-key
   "n" '(:ignore t :which-key "notes")
   "nc" '(org-capture :which-key "capture")
-  "nn" '(cjc/org-open-index-file :which-key "open index"))
+  "nn" '(cjc/org-open-index-file :which-key "open index")
+  "na" '(org-agenda :which-key "agenda"))
 
 (use-package org-superstar
   :after org
