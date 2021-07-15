@@ -383,21 +383,21 @@
 (setq org-habit-graph-column 60)
 
 ; configure custom agenda views
-;(setq org-agenda-custom-commands
-; '(("d" "Dashboard"
-;   ((agenda "" ((org-deadline-warning-days 7)))
-;    (todo "TODO+STYLE=\"habit\"" ((org-agenda-overriding-header "Habits")))
-;    (todo "NEXT"
-;      ((org-agenda-overriding-header "Next Tasks")))
-;    (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+(setq org-agenda-custom-commands
+ '(("d" "Dashboard"
+   ((agenda "" ((org-deadline-warning-days 7)))
+    (todo "TODO+STYLE=\"habit\"" ((org-agenda-overriding-header "Habits")))
+    (todo "NEXT"
+      ((org-agenda-overriding-header "Next Tasks")))
+    (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
 
-;  ("n" "Next Tasks"
-;   ((todo "NEXT"
-;      ((org-agenda-overriding-header "Next Tasks")))))
+  ("n" "Next Tasks"
+   ((todo "NEXT"
+      ((org-agenda-overriding-header "Next Tasks")))))
 
-;  ("h" "Home Tasks" tags-todo "+work")
-;  ("w" "Work Tasks" tags-todo "+home")
-;  ("m" "Media" tags-todo "+media")))
+  ("h" "Home Tasks" tags-todo "+work")
+  ("w" "Work Tasks" tags-todo "+home")
+  ("m" "Media" tags-todo "+media")))
 
 ; default tags
 (setq org-tag-alist
@@ -505,6 +505,14 @@
   "nc" '(org-capture :which-key "capture")
   "nn" '(cjc/org-open-index-file :which-key "open index")
   "na" '(org-agenda :which-key "agenda"))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 (use-package org-superstar
   :after org
