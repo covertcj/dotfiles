@@ -19,6 +19,6 @@ if (-Not (Test-Path "~/.emacs.d")) {
   Start "~/.emacs.d/bin/doom.cmd" -ArgumentList "install" -Wait -NoNewWindow
 }
 
-emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file \`"$HOME/dev/dotfiles/.doom.d/config.org\`")"
+emacs --batch --eval "(require 'org)" --eval "(org-babel-tangle-file \`"~/dev/dotfiles/.doom.d/config.org\`")"
 Start "~/.emacs.d/bin/doom.cmd" -ArgumentList "sync" -Wait -NoNewWindow
 
