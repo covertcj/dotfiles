@@ -1,5 +1,6 @@
 #+TITLE: Doom Emacs Configuration
 #+PROPERTY: :tangle ./.doom.d/config.el
+#+STARTUP: content
 
 * init.el
 
@@ -310,5 +311,4 @@ Configures which doom modules to include
 #+end_src
 
 * Inspiration
-
 ** [[https:tecosaur.github.io/emacs-config/config.html][tecosaur's config]]
