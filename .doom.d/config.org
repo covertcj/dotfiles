@@ -203,6 +203,23 @@ Configures which doom modules to include
       user-mail-address "covertops5@gmail.com")
 #+end_src
 
+** Variables
+
+#+begin_src emacs-lisp :tangle yes
+(defvar cjc/doom-variable-pitch-font (font-spec :family "Roboto"      :size 14 :weight 'normal))
+(defvar cjc/doom-font                (font-spec :family "Roboto Mono" :size 14 :weight 'normal))
+(defvar cjc/doom-big-font            (font-spec :family "Roboto Mono" :size 26 :weight 'normal))
+#+end_src
+
+** Machine/Private Config
+
+Add machine local or private configuration to [[file:~/.emacs.d/.local/private.el][private.el]]
+
+#+begin_src emacs-lisp :tangle yes
+(defvar cjc/private-init-file (concat doom-local-dir "private.el"))
+(load cjc/private-init-file nil t)
+#+end_src
+
 * Appearance
 ** Basics
 
@@ -257,9 +274,9 @@ Configures which doom modules to include
 
 ** Fonts
 #+begin_src emacs-lisp :tangle yes
-(setq doom-variable-pitch-font (font-spec :family "Roboto"      :size 14 :weight 'normal)
-      doom-font                (font-spec :family "Roboto Mono" :size 14 :weight 'normal)
-      doom-big-font            (font-spec :family "Roboto Mono" :size 14 :weight 'normal))
+(setq doom-variable-pitch-font cjc/doom-variable-pitch-font
+      doom-font                cjc/doom-font
+      doom-big-font            cjc/doom-big-font)
 #+end_src
 
 * Org Mode

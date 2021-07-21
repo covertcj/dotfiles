@@ -1,6 +1,13 @@
 (setq user-full-name "Christopher J Covert"
       user-mail-address "covertops5@gmail.com")
 
+(defvar cjc/doom-variable-pitch-font (font-spec :family "Roboto"      :size 14 :weight 'normal))
+(defvar cjc/doom-font                (font-spec :family "Roboto Mono" :size 14 :weight 'normal))
+(defvar cjc/doom-big-font            (font-spec :family "Roboto Mono" :size 26 :weight 'normal))
+
+(defvar cjc/private-init-file (concat doom-local-dir "private.el"))
+(load cjc/private-init-file nil t)
+
 ; relative line numbers
 (setq display-line-numbers-type t
       display-line-numbers-type 'relative)
@@ -40,9 +47,9 @@
       :desc "choose theme"
       "t T" #'counsel-load-theme)
 
-(setq doom-variable-pitch-font (font-spec :family "Roboto"      :size 14 :weight 'normal)
-      doom-font                (font-spec :family "Roboto Mono" :size 14 :weight 'normal)
-      doom-big-font            (font-spec :family "Roboto Mono" :size 14 :weight 'normal))
+(setq doom-variable-pitch-font cjc/doom-variable-pitch-font
+      doom-font                cjc/doom-font
+      doom-big-font            cjc/doom-big-font)
 
 (setq org-directory "~/org/")
 
