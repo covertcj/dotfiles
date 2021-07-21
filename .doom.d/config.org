@@ -195,12 +195,6 @@ Configures which doom modules to include
        (default +bindings +smartparens))
 #+end_src
 
-* packages.el
-
-#+begin_src emacs-lisp :tangle ./packages.el
-(package! org-contacts)
-#+end_src
-
 * Basics
 
 #+begin_src emacs-lisp :tangle yes
