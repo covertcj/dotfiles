@@ -1,0 +1,60 @@
+(defcfg
+  input  (device-file "/dev/input/by-id/usb-04d9_USB_Keyboard-event-kbd")
+  output (uinput-sink "My KMonad output")
+
+  fallthrough true
+  allow-cmd false
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+#| Home Row Mod Keys |#
+(defalias
+    l_m (tap-hold-next-release 200 s lmet)
+    l_a (tap-hold-next-release 200 d lalt)
+    l_c (tap-hold-next-release 200 f lctl)
+    l_s (tap-hold-next-release 200 space lsft)
+
+    ;;r_sh (tap-hold-next-release 200 j rsft)
+    r_c (tap-hold-next-release 200 j rctl)
+    r_a (tap-hold-next-release 200 k lalt)
+    r_m (tap-hold-next-release 200 l rmet)
+)
+
+(defalias
+  nav  (tap-hold-next-release 200 a (layer-toggle navigation))
+)
+
+(deflayer qwerty
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  esc  @nav @l_m @l_a @l_c g    h    @r_c @r_a @r_m ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           @l_s           ralt rmet cmp  rctl
+)
+
+#| Layer Template
+
+(deflayer template
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _    _
+)
+
+ |#
+
+(deflayer navigation
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   left down up   rght XX   del  XX
+  XX   XX   XX   XX   XX   home end  XX   XX   XX   XX   XX
+  XX   XX   XX             XX             XX   XX   XX   XX
+)
