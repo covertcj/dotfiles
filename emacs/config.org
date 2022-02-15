@@ -196,11 +196,46 @@ Runs a hook after the theme is loaded or changed.
 	(error (load-theme next-theme t)))))
 #+END_SRC
 
+*** Icons
+
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons)
+#+END_SRC
+
+*** Modeline
+
+#+BEGIN_SRC emacs-lisp
+  (use-package doom-modeline
+    :init (doom-modeline-mode 1))
+#+END_SRC
+
+*** Rainbow Delimiters
+
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode)
+          (org-mode . rainbow-delimiters-mode))
+#+END_SRC
+
 ** Evil Mode
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :config 
-    (evil-mode 1))
+    :init
+      (setq evil-want-integration t)
+      (setq evil-want-keybinding nil)
+      (setq evil-want-C-u-scroll t)
+      :config
+      (evil-mode 1)
+      (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+      (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+    
+      (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+      (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
+    
+    (use-package evil-collection
+      :after evil
+      :config
+      (evil-collection-init))
 #+END_SRC
 

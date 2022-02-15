@@ -122,6 +122,29 @@
 	  (enable-theme next-theme)
       (error (load-theme next-theme t)))))
 
+(use-package all-the-icons)
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode)
+        (org-mode . rainbow-delimiters-mode))
+
 (use-package evil
-  :config 
-  (evil-mode 1))
+  :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-want-C-u-scroll t)
+    :config
+    (evil-mode 1)
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line))
+
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
