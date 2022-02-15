@@ -215,6 +215,15 @@ Runs a hook after the theme is loaded or changed.
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
 #+END_SRC
+
+** Which Key
+
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :init (which-key-mode)
+    :diminish which-key-mode
+    :config
+    (setq which-key-idle-delay 0.5))
 #+END_SRC
 
 ** Evil Mode
