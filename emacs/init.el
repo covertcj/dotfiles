@@ -14,6 +14,21 @@
 (setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
 
+;; Font Settings
+(setq cjc/default-font-mono "Roboto Mono")
+(setq cjc/default-font-variable "Roboto")
+(setq cjc/default-font-height 150)
+
+;; Theme Settings
+(setq cjc/default-dark-theme 'doom-challenger-deep)
+(setq cjc/default-light-theme 'doom-tomorrow-day)
+(setq cjc/theme-list
+  (list cjc/default-dark-theme
+	cjc/default-light-theme))
+
+;; Org Settings
+(setq cjc/default-org-notes-dir (expand-file-name "~/org/"))
+
 (setq inhibit-startup-message t)
 
 ; remove menu's/scroll bars
@@ -73,6 +88,39 @@
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
+(defvar after-change-theme-hook nil
+  "Hook run after a color theme is loaded using `load-theme' or `enable-theme'.")
+
+(defadvice load-theme (after run-after-change-theme-hook activate)
+  "Run `after-change-theme-hook'."
+  (run-hooks 'after-change-theme-hook))
+
+(defadvice enable-theme (after run-after-change-theme-hook activate)
+  "Run `after-change-theme-hook'."
+  (run-hooks 'after-change-theme-hook))
+
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold nil
+      doom-themes-enable-italic nil)
+  (load-theme (car cjc/theme-list) t)
+  (doom-themes-org-config))
+
+(setq cjc/theme-index 0)
+
+(defun cjc/toggle-themes ()
+  "Switches between a list of themes"
+  (interactive)
+  (let* ((current-theme (nth cjc/theme-index cjc/theme-list))
+	  (next-index (mod (+ cjc/theme-index 1) (length cjc/theme-list)))
+	  (next-theme (nth next-index cjc/theme-list)))
+      (disable-theme current-theme)
+      (message "Theme: %s" next-theme)
+      (setq cjc/theme-index next-index)
+      (condition-case nil
+	  (enable-theme next-theme)
+      (error (load-theme next-theme t)))))
 
 (use-package evil
   :config 

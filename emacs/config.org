@@ -31,6 +31,42 @@
 
 * Basic Config
 
+** Config Variables
+
+Variables used throughout the rest of the config. They can be overriden per
+machine.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Font Settings
+  (setq cjc/default-font-mono "Roboto Mono")
+  (setq cjc/default-font-variable "Roboto")
+  (setq cjc/default-font-height 150)
+
+  ;; Theme Settings
+  (setq cjc/default-dark-theme 'doom-challenger-deep)
+  (setq cjc/default-light-theme 'doom-tomorrow-day)
+  (setq cjc/theme-list
+    (list cjc/default-dark-theme
+	  cjc/default-light-theme))
+
+  ;; Org Settings
+  (setq cjc/default-org-notes-dir (expand-file-name "~/org/"))
+#+END_SRC
+
+** Local / Private Config
+
+Loads a local =priv.el= file that can contain local theming/font override and
+other local configuration options.
+
+#+BEGIN_SRC
+  (defvar cjc/private-init-file
+    (concat (file-name-directory user-init-file)
+            "priv.el"))
+  
+  (when (file-exists-p cjc/private-init-file)
+    (load cjc/private-init-file))
+#+END_SRC
+
 ** UI Cleanup
 
 #+BEGIN_SRC emacs-lisp
@@ -108,6 +144,57 @@
 #+end_src
 
 * Packages
+
+** Theming
+
+*** Theme Hook
+
+Runs a hook after the theme is loaded or changed.
+
+#+begin_src emacs-lisp
+  (defvar after-change-theme-hook nil
+    "Hook run after a color theme is loaded using `load-theme' or `enable-theme'.")
+  
+  (defadvice load-theme (after run-after-change-theme-hook activate)
+    "Run `after-change-theme-hook'."
+    (run-hooks 'after-change-theme-hook))
+  
+  (defadvice enable-theme (after run-after-change-theme-hook activate)
+    "Run `after-change-theme-hook'."
+    (run-hooks 'after-change-theme-hook))
+#+end_src
+
+*** Themes
+
+#+BEGIN_SRC emacs-lisp
+
+  (use-package doom-themes
+    :config
+    (setq doom-themes-enable-bold nil
+	doom-themes-enable-italic nil)
+    (load-theme (car cjc/theme-list) t)
+    (doom-themes-org-config))
+
+#+END_SRC
+
+*** Quick Switching
+
+#+BEGIN_SRC emacs-lisp
+  (setq cjc/theme-index 0)
+
+  (defun cjc/toggle-themes ()
+    "Switches between a list of themes"
+    (interactive)
+    (let* ((current-theme (nth cjc/theme-index cjc/theme-list))
+	    (next-index (mod (+ cjc/theme-index 1) (length cjc/theme-list)))
+	    (next-theme (nth next-index cjc/theme-list)))
+	(disable-theme current-theme)
+	(message "Theme: %s" next-theme)
+	(setq cjc/theme-index next-index)
+	(condition-case nil
+	    (enable-theme next-theme)
+	(error (load-theme next-theme t)))))
+#+END_SRC
 
 ** Evil Mode
 
