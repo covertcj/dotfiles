@@ -213,8 +213,8 @@ Runs a hook after the theme is loaded or changed.
 
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode)
-          (org-mode . rainbow-delimiters-mode))
+    :hook (prog-mode . rainbow-delimiters-mode))
+#+END_SRC
 #+END_SRC
 
 ** Evil Mode

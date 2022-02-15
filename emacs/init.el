@@ -128,8 +128,8 @@
   :init (doom-modeline-mode 1))
 
 (use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode)
-        (org-mode . rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 
 (use-package evil
   :init
