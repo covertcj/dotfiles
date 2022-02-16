@@ -482,6 +482,11 @@ option.
 
 *** helpful
 
+*** lsp-mode
+
+*** dap-mode
+LSP style debugging
+
 ** General
 
 *** Leader Key Bindings
