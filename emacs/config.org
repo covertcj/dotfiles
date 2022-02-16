@@ -398,3 +398,37 @@ Use vertico as a completion framework.
     )
 #+END_SRC
 
+* TODOs
+
+Old config can be found in the [[https://github.com/covertcj/dotfiles/blob/3cb2d7c55417ed658728320ed9f5de24439add7d/Emacs.org][git history]] 
+
+** Packages
+
+*** embark
+"Context menu" actions for completion buffers.
+
+*** magit
+
+*** hl-todo
+
+*** lsp-mode
+
+*** corfu
+Inline completion menu UI.
+
+*** company
+A code completion framework. I should look into if this is still the best
+option.
+
+*** helpful
+
+** General
+
+*** Leader Key Bindings
+
+*** Terminal Emulation
+
+*** Eshell
+
+*** Org Basics
+
