@@ -15,8 +15,8 @@
 (straight-use-package 'use-package)
 
 ;; Font Settings
-(setq cjc/default-font-mono "Roboto Mono")
-(setq cjc/default-font-variable "Roboto")
+(setq cjc/default-font-mono "Iosevka Term SS12")
+(setq cjc/default-font-variable "Iosevka Term SS12")
 (setq cjc/default-font-height 150)
 
 ;; Theme Settings
