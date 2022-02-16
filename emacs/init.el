@@ -89,6 +89,11 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
+;; Fonts
+(set-face-attribute 'default nil :font cjc/default-font-mono :height cjc/default-font-height)
+(set-face-attribute 'fixed-pitch nil :font cjc/default-font-mono :height cjc/default-font-height)
+(set-face-attribute 'variable-pitch nil :font cjc/default-font-variable :height cjc/default-font-height)
+
 (defvar after-change-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme' or `enable-theme'.")
 
