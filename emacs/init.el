@@ -158,3 +158,23 @@
     :after evil
     :config
     (evil-collection-init))
+
+(use-package vertico
+  :bind
+  (:map vertico-map
+   ("C-j" . vertico-next)
+   ("C-k" . vertico-previous)
+   ("C-f" . vertico-exit))
+  :custom
+  (vertico-cycle t)
+  :init
+  (vertico-mode))
+
+(use-package savehist
+  :config
+  (savehist-mode))
+
+(use-package marginalia
+  :after vertico
+  :config
+  (marginalia-mode))

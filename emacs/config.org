@@ -176,14 +176,12 @@ Runs a hook after the theme is loaded or changed.
 *** Themes
 
 #+BEGIN_SRC emacs-lisp
-
   (use-package doom-themes
     :config
     (setq doom-themes-enable-bold nil
 	doom-themes-enable-italic nil)
     (load-theme (car cjc/theme-list) t)
     (doom-themes-org-config))
-
 #+END_SRC
 
 *** Quick Switching
@@ -255,5 +253,31 @@ Runs a hook after the theme is loaded or changed.
       :after evil
       :config
       (evil-collection-init))
+#+END_SRC
+
+** Completion
+
+Use vertico as a completion framework.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package vertico
+    :bind
+    (:map vertico-map
+     ("C-j" . vertico-next)
+     ("C-k" . vertico-previous)
+     ("C-f" . vertico-exit))
+    :custom
+    (vertico-cycle t)
+    :init
+    (vertico-mode))
+
+  (use-package savehist
+    :config
+    (savehist-mode))
+
+  (use-package marginalia
+    :after vertico
+    :config
+    (marginalia-mode))
 #+END_SRC
 
