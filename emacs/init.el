@@ -319,3 +319,17 @@
     ;;;; 4. locate-dominating-file
     ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
   )
+
+(use-package magit
+  :after general
+  :config
+  (cjc/leader-key
+   "g"  '(:ignore t :which-key "git")
+   "gg" '(magit-status :which-key "status")
+   "gb" '(magit-branch :which-key "branch")
+   "gc" '(magit-branch-or-checkout :which-key "branch or checkout")))
+
+; TODO this has worked in the past, but is untested here
+(when (eq system-type 'windows-nt)
+  (setenv "SSH_ASKPASS" "git-gui--askpass")
+  (use-package ssh-agency))
