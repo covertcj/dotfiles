@@ -89,6 +89,30 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
+(use-package general
+  :config
+  (general-evil-setup)
+  (general-create-definer cjc/leader-key
+    :states '(normal visual emacs motion)
+    :keymaps 'override
+    :prefix "SPC"
+    :non-normal-prefix "C-SPC")
+
+(cjc/leader-key
+  "b"  '(:ignore t :which-key "buffers")
+  "bb" '(consult-buffer :which-key "switch buffer")
+  "bk" '(kill-current-buffer :which-key "kill current buffer")
+  "bK" '(kill-buffer :which-key "kill target buffer"))
+
+(cjc/leader-key
+  "t"  '(:ignore t :which-key "settings")
+  "tf" '(text-scale-adjust :which-key "font scale")
+  "tF" '(text-scale-mode :which-key "font scale toggle")
+  "tt" '(cjc/toggle-themes :which-key "theme cycle")
+  "tT" '(consult-theme :which-key "theme select"))
+
+)
+
 ;; Fonts
 (set-face-attribute 'default nil :font cjc/default-font-mono :height cjc/default-font-height)
 (set-face-attribute 'fixed-pitch nil :font cjc/default-font-mono :height cjc/default-font-height)
@@ -272,7 +296,7 @@
      consult-bookmark consult-recent-file consult-xref
      consult--source-bookmark consult--source-recent-file
      consult--source-project-recent-file
-     :preview-key (kbd "M-.")
+     :preview-key (kbd "M-."))
 
     ;; Optionally configure the narrowing key.
     ;; Both < and C-+ work reasonably well.

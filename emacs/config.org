@@ -143,6 +143,51 @@ other local configuration options.
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 #+end_src
 
+** Key Bindings
+
+All subsections will be wrapped in the =:config= section for the =general=
+package, so that they have access to the =cjc/leader-key=.
+
+*** Setup
+
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :config
+    (general-evil-setup)
+    (general-create-definer cjc/leader-key
+      :states '(normal visual emacs motion)
+      :keymaps 'override
+      :prefix "SPC"
+      :non-normal-prefix "C-SPC")
+#+END_SRC
+
+*** Buffer Management
+
+#+BEGIN_SRC emacs-lisp
+  (cjc/leader-key
+    "b"  '(:ignore t :which-key "buffers")
+    "bb" '(consult-buffer :which-key "switch buffer")
+    "bk" '(kill-current-buffer :which-key "kill current buffer")
+    "bK" '(kill-buffer :which-key "kill target buffer"))
+#+END_SRC
+
+*** Settings
+
+#+BEGIN_SRC emacs-lisp
+  (cjc/leader-key
+    "t"  '(:ignore t :which-key "settings")
+    "tf" '(text-scale-adjust :which-key "font scale")
+    "tF" '(text-scale-mode :which-key "font scale toggle")
+    "tt" '(cjc/toggle-themes :which-key "theme cycle")
+    "tT" '(consult-theme :which-key "theme select"))
+#+END_SRC
+
+*** End general Config
+
+#+BEGIN_SRC emacs-lisp
+  )
+#+END_SRC
+
 * Packages
 
 ** Theming
@@ -373,7 +418,7 @@ Use vertico as a completion framework.
        consult-bookmark consult-recent-file consult-xref
        consult--source-bookmark consult--source-recent-file
        consult--source-project-recent-file
-       :preview-key (kbd "M-.")
+       :preview-key (kbd "M-."))
 
       ;; Optionally configure the narrowing key.
       ;; Both < and C-+ work reasonably well.
