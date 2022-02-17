@@ -89,7 +89,19 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
+(use-package hydra
+  :config
+  (defhydra cjc/hydra-font-adjust (:timeout 10)
+    "scale editor text"
+    ("j" cjc/font-size-decr "-")
+    ("k" cjc/font-size-incr "+")
+    ("J" cjc/font-size-decr-fast "--")
+    ("K" cjc/font-size-incr-fast "++")
+    ("r" cjc/font-size-reset "reset" :exit t)
+    ("f" nil "finished" :exit t)))
+
 (use-package general
+  :after hydra
   :config
   (general-evil-setup)
   (general-create-definer cjc/leader-key
@@ -106,17 +118,30 @@
 
 (cjc/leader-key
   "t"  '(:ignore t :which-key "settings")
-  "tf" '(text-scale-adjust :which-key "font scale")
-  "tF" '(text-scale-mode :which-key "font scale toggle")
+  "tf" '(cjc/hydra-font-adjust/body :which-key "font scale")
+  "tF" '(cjc/font-size-reset :which-key "font scale reset")
   "tt" '(cjc/toggle-themes :which-key "theme cycle")
   "tT" '(consult-theme :which-key "theme select"))
 
 )
 
-;; Fonts
-(set-face-attribute 'default nil :font cjc/default-font-mono :height cjc/default-font-height)
-(set-face-attribute 'fixed-pitch nil :font cjc/default-font-mono :height cjc/default-font-height)
-(set-face-attribute 'variable-pitch nil :font cjc/default-font-variable :height cjc/default-font-height)
+(defun cjc/font-size-adjust (&optional arg)
+   (interactive "p")
+   (if (= arg 0)
+       (setq cjc/font-size-adjustment 0)
+       (setq cjc/font-size-adjustment (+ cjc/font-size-adjustment arg)))
+
+   (set-face-attribute 'default nil :font cjc/default-font-mono :height (+ cjc/default-font-height cjc/font-size-adjustment))
+   (set-face-attribute 'fixed-pitch nil :font cjc/default-font-mono :height (+ cjc/default-font-height cjc/font-size-adjustment))
+   (set-face-attribute 'variable-pitch nil :font cjc/default-font-variable :height (+ cjc/default-font-height cjc/font-size-adjustment)))
+
+(defun cjc/font-size-reset () (interactive) (cjc/font-size-adjust  0))
+(defun cjc/font-size-incr  () (interactive) (cjc/font-size-adjust +10))
+(defun cjc/font-size-decr  () (interactive) (cjc/font-size-adjust -10))
+(defun cjc/font-size-incr-fast  () (interactive) (cjc/font-size-adjust +30))
+(defun cjc/font-size-decr-fast  () (interactive) (cjc/font-size-adjust -30))
+
+(cjc/font-size-reset)
 
 (defvar after-change-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme' or `enable-theme'.")
@@ -369,19 +394,19 @@
 ;    (corfu-global-mode)
 ;    (setq tab-always-indent 'complete))
 
-(use-package company
-  :after lsp-mode
-  :hook (prog-mode . company-mode)
-  :bind (:map company-active-map
-          ("<tab>" . company-complete-selection))
-        (:map lsp-mode-map
-          ("<tab>" . company-complete-selection))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.2))
-
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+  (use-package company
+    :after lsp-mode
+    :hook (prog-mode . company-mode)
+    :bind (:map company-active-map
+            ("<tab>" . company-complete-selection))
+          (:map lsp-mode-map
+            ("<tab>" . company-complete-selection))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.2))
+  
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
 
 (use-package typescript-mode
   :mode "\\.[jt]sx?\\'"
