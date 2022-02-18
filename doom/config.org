@@ -202,47 +202,74 @@
 * Config
 #+PROPERTY: header-args:emacs-lisp :tangle ./config.el :mkdirp yes
 
+** Basics
+
 #+begin_src emacs-lisp :tangle yes
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
+#+end_src
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-unicode-font' -- for unicode glyphs
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
+*** Variables
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+#+begin_src emacs-lisp :tangle yes
+(defvar cjc/doom-variable-pitch-font (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
+(defvar cjc/doom-font                (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
+(defvar cjc/doom-big-font            (font-spec :family "Iosevka Term SS12" :size 26 :weight 'normal))
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(defvar cjc/theme-dark-default 'doom-1337)
+(defvar cjc/theme-light-default 'doom-tomorrow-day)
+  (setq cjc/theme-list
+    (list cjc/theme-dark-default
+	        cjc/theme-light-default))
+#+end_src
 
+*** Appearance
+
+**** Basics
+
+#+begin_src emacs-lisp :tangle yes
+(setq display-line-numbers-type 'relative)
+
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+#+end_src
+
+**** Fonts
+
+#+begin_src emacs-lisp :tangle yes
+(setq doom-font-increment 1)
+(setq doom-variable-pitch-font cjc/doom-variable-pitch-font
+      doom-font                cjc/doom-font
+      doom-big-font            cjc/doom-big-font)
+#+end_src
+
+**** Theme
+
+#+begin_src emacs-lisp :tangle yes
+(setq cjc/theme-index 0)
+(setq doom-theme (car cjc/theme-list))
+
+(defun cjc/toggle-themes ()
+  "Switches between a list of themes"
+  (interactive)
+  (let* ((current-theme (nth cjc/theme-index cjc/theme-list))
+         (next-index (mod (+ cjc/theme-index 1) (length cjc/theme-list)))
+         (next-theme (nth next-index cjc/theme-list)))
+    (disable-theme current-theme)
+    (message "Theme: %s" next-theme)
+    (setq cjc/theme-index next-index)
+    (condition-case nil
+        (enable-theme next-theme)
+      (error (load-theme next-theme t)))))
+
+(map! :leader
+      :desc "toggle theme"
+      "t t" #'cjc/toggle-themes)
+#+end_src
+
+** Org
+#+begin_src emacs-lisp :tangle yes
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
