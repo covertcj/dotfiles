@@ -361,10 +361,11 @@
 
 (use-package lsp-mode
   :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "<space> l")
-  :hook (((js-mode js-jsx-mode) . lsp)
-   (lsp-mode . lsp-enable-which-key-integration))
+  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  :config
+  (cjc/leader-key "l" '(:keymap lsp-command-map :which-key "lsp"))
+  (lsp-enable-which-key-integration t)
+  :hook ((js-mode js-jsx-mode) . lsp-deferred)
   :commands lsp lsp-deferred)
 
 (use-package lsp-ui :commands lsp-ui-mode)
@@ -413,3 +414,8 @@
   :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
+
+(use-package rustic
+  :hook (rust-mode . lsp-deferred)
+  :config
+  (setq rustic-format-on-save t))
