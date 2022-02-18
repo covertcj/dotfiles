@@ -218,8 +218,8 @@
 (defvar cjc/doom-font                (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
 (defvar cjc/doom-big-font            (font-spec :family "Iosevka Term SS12" :size 26 :weight 'normal))
 
-(defvar cjc/theme-dark-default 'doom-badger)
-(defvar cjc/theme-light-default 'doom-tomorrow-day)
+(defvar cjc/theme-dark-default 'doom-monokai-pro)
+(defvar cjc/theme-light-default 'doom-solarized-light)
   (setq cjc/theme-list
     (list cjc/theme-dark-default
 	        cjc/theme-light-default))
@@ -246,7 +246,9 @@
 
 **** Theme
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
+(setq doom-themes-enable-italic nil)
+
 (setq cjc/theme-index 0)
 (setq doom-theme (car cjc/theme-list))
 (defun cjc/toggle-themes ()
@@ -267,6 +269,13 @@
       "t t" #'cjc/toggle-themes)
 #+end_src
 
+***** Theme Settings / Overrides
+
+****** doom-ir-black
+
+#+begin_src emacs-lisp
+(setq doom-ir-black-brighter-comments t)
+#+end_src
 ** Org
 
 #+begin_src emacs-lisp :tangle yes

@@ -199,8 +199,8 @@
 (defvar cjc/doom-font                (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
 (defvar cjc/doom-big-font            (font-spec :family "Iosevka Term SS12" :size 26 :weight 'normal))
 
-(defvar cjc/theme-dark-default 'doom-badger)
-(defvar cjc/theme-light-default 'doom-tomorrow-day)
+(defvar cjc/theme-dark-default 'doom-monokai-pro)
+(defvar cjc/theme-light-default 'doom-solarized-light)
   (setq cjc/theme-list
     (list cjc/theme-dark-default
 	        cjc/theme-light-default))
@@ -213,6 +213,8 @@
 (setq doom-variable-pitch-font cjc/doom-variable-pitch-font
       doom-font                cjc/doom-font
       doom-big-font            cjc/doom-big-font)
+
+(setq doom-themes-enable-italic nil)
 
 (setq cjc/theme-index 0)
 (setq doom-theme (car cjc/theme-list))
@@ -251,6 +253,7 @@
 ;; https://github.com/raxod502/straight.el#the-recipe-format
 ;(package! another-package
 ;  :recipe (:host github :repo "username/repo"))
+(setq doom-ir-black-brighter-comments t)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
