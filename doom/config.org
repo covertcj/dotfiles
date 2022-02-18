@@ -1,11 +1,9 @@
 #+TITLE: My Doom Emacs Configuration
 #+AUTHOR: Christopher J. Covert
-#+PROPERTY: header-args:emacs-lisp :mkdirp yes
+#+PROPERTY: header-args:emacs-lisp :tangle ./config.el
 
 * Init
-#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
-
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle ./init.el
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;; This file controls what Doom modules are enabled and what order they load
@@ -102,7 +100,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
-       ;;lsp               ; M-x vscode
+       lsp               ; M-x vscode
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -145,9 +143,9 @@
        ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       ;;json              ; At least it ain't XML
+       json              ; At least it ain't XML
        ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
-       ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript +lsp)        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        ;;latex             ; writing papers in Emacs has never been so fun
@@ -177,8 +175,8 @@
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
-       ;;web               ; the tubes
-       ;;yaml              ; JSON, but readable
+       web               ; the tubes
+       yaml              ; JSON, but readable
        ;;zig               ; C, but simpler
 
        :email
@@ -200,11 +198,9 @@
 #+end_src
 
 * Config
-#+PROPERTY: header-args:emacs-lisp :tangle ./config.el :mkdirp yes
-
 ** Basics
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (setq user-full-name "John Doe"
@@ -213,7 +209,7 @@
 
 *** Variables
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (defvar cjc/doom-variable-pitch-font (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
 (defvar cjc/doom-font                (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
 (defvar cjc/doom-big-font            (font-spec :family "Iosevka Term SS12" :size 26 :weight 'normal))
@@ -229,7 +225,7 @@
 
 **** Basics
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (setq display-line-numbers-type 'relative)
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -237,7 +233,7 @@
 
 **** Fonts
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (setq doom-font-increment 1)
 (setq doom-variable-pitch-font cjc/doom-variable-pitch-font
       doom-font                cjc/doom-font
@@ -278,14 +274,12 @@
 #+end_src
 ** Org
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (setq org-directory "~/org/")
 #+end_src
 
 * Packages
-#+PROPERTY: header-args:emacs-lisp :tangle ./packages.el :mkdirp yes
-
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle ./packages.el
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
