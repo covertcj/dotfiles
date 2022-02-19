@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Christopher J Covert"
+      user-mail-address "covertops5@gmail.com")
 
 (defvar cjc/doom-variable-pitch-font (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
 (defvar cjc/doom-font                (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
