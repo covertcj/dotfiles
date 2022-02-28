@@ -1,0 +1,26 @@
+#+TITLE: Interactive Grep Module
+
+Provides =deadgrep= as a tool for interactively searching a project.
+
+* Config
+
+#+begin_src emacs-lisp :tangle ./config.el
+;;; interactivegrep/init.el -*- lexical-binding: t; -*-
+(use-package! deadgrep
+  :commands (deadgrep))
+
+(map! :leader
+      :desc "deadgrep"
+      "s g" #'deadgrep)
+#+end_src
+
+#+RESULTS:
+: deadgrep
+
+* Packages
+
+#+begin_src emacs-lisp :tangle ./packages.el
+;; -*- no-byte-compile: t; -*-
+
+(package! deadgrep)
+#+end_src

@@ -77,6 +77,7 @@
 #+begin_src emacs-lisp
 (setq doom-ir-black-brighter-comments t)
 #+end_src
+
 ** Org
 
 #+begin_src emacs-lisp
@@ -275,10 +276,16 @@
 
        :config
        ;;literate
-       (default +bindings +smartparens))
+       (default +bindings +smartparens)
+
+       :cjctools
+       interactivegrep)
 #+end_src
 
+#+RESULTS:
+
 * Packages
+
 #+begin_src emacs-lisp :tangle ./packages.el
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
