@@ -45,4 +45,5 @@
 
 (setq doom-ir-black-brighter-comments t)
 
-(setq org-directory "~/org/")
+(setq org-directory "~/org/"
+      org-roam-directory "~/org/")
