@@ -7,7 +7,7 @@
 (defvar cjc/doom-font                (font-spec :family "Iosevka Term SS12" :size 15 :weight 'normal))
 (defvar cjc/doom-big-font            (font-spec :family "Iosevka Term SS12" :size 26 :weight 'normal))
 
-(defvar cjc/theme-dark-default 'doom-monokai-pro)
+(defvar cjc/theme-dark-default 'doom-Iosvkem)
 (defvar cjc/theme-light-default 'doom-solarized-light)
   (setq cjc/theme-list
     (list cjc/theme-dark-default
@@ -41,7 +41,8 @@
 
 (map! :leader
       :desc "toggle theme"
-      "t t" #'cjc/toggle-themes)
+      "t t" #'cjc/toggle-themes
+      "t T" #'load-theme)
 
 (setq doom-ir-black-brighter-comments t)
 
