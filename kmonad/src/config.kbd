@@ -8,6 +8,22 @@
 
 (defalias
   hyp  (tap-next-release esc (layer-toggle hyper))
+  qwe  (layer-switch qwerty)
+  hrm  (layer-switch home-row-mods)
+)
+
+(defalias
+    mla (tap-hold-next-release 200 a lmet)
+    als (tap-hold-next-release 200 s lalt)
+    sld (tap-hold-next-release 200 d lsft)
+    clf (tap-hold-next-release 200 f lctl)
+
+    crj (tap-hold-next-release 200 j rctl)
+    srk (tap-hold-next-release 200 k rsft)
+    arl (tap-hold-next-release 200 l lalt)
+    mr; (tap-hold-next-release 200 ; rmet)
+
+    ssp (tap-hold-next-release 200 spc lsft)
 )
 
 (deflayer qwerty
@@ -30,9 +46,17 @@
 
  |#
 
+(deflayer home-row-mods
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  @hyp @mla @als @sld @clf _    _    @crj @srk @arl @mr; _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              @ssp           _    _    _    _
+)
+
 (deflayer hyper
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
-  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
+  XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   @qwe @hrm XX
   XX   XX   XX   XX   XX   XX   left down up   rght XX   del  XX
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
   XX   XX   XX             XX             XX   XX   XX   XX
