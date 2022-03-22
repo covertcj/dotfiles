@@ -57,7 +57,7 @@
 (deflayer hyper
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   @qwe @hrm XX
-  XX   XX   XX   XX   XX   XX   left down up   rght XX   del  XX
+  XX   XX   XX   XX   XX   XX   left down up   rght bspc del  XX
   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX   XX
   XX   XX   XX             XX             XX   XX   XX   XX
 )
