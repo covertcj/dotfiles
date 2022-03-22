@@ -182,7 +182,8 @@
        :cjc
        basics
        fonts
-       theme
        interactivegrep
        org
+       snipe
+       theme
        treemacs)
