@@ -684,19 +684,21 @@ bindsym $mod+Ctrl+greater move workspace to output right
 bindsym $mod+Ctrl+less move workspace to output left
 
 # default monitors for workspaces
-workspace "$ws1" output eDP-1-1
+workspace "$ws1" output DP-0
 workspace "$ws2" output HDMI-0
 workspace "$ws3" output HDMI-0
-workspace "$ws4" output DP-0
+workspace "$ws4" output eDP-1-1
 workspace "$ws5" output HDMI-0
 
 # default workspaces for apps
 assign[class="^firefox"] "$ws1"
-assign[class="^kitty"] "$ws1"
-assign[class="^emacs$"] "$ws3"
-assign[class="^slack"] "$ws4"
+assign[class="^kitty"]   "$ws2"
+assign[class="^emacs"]  "$ws3"
+assign[class="^Emacs"]  "$ws3"
+assign[class="^slack"]   "$ws4"
+assign[class="^Slack"]   "$ws4"
 assign[class="^discord"] "$ws4"
-assign[class="^Steam"] "$ws5"
+assign[class="^Steam"]   "$ws5"
 
 # float steam games by default
 for_window [class="^steam_app_"] floating enable
