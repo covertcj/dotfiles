@@ -186,4 +186,5 @@
        org
        snipe
        theme
-       treemacs)
+       treemacs
+       format)
