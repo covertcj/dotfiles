@@ -703,6 +703,10 @@ assign[class="^Steam"]   "$ws5"
 # float steam games by default
 for_window [class="^steam_app_"] floating enable
 
-## Launch // Emacs // <> Enter ##
+## Launch // Emacs // <> E ##
 set_from_resource $i3-wm.binding.emacs i3-wm.binding.emacs e
 bindsym $mod+$i3-wm.binding.emacs exec /snap/bin/emacs
+
+## Launch // Emacs // <> O ##
+set_from_resource $i3-wm.binding.emacs-everywhere i3-wm.binding.emacs-everywhere o
+bindsym $mod+$i3-wm.binding.emacs-everywhere exec "/snap/bin/emacsclient --eval '(emacs-everywhere)'"
