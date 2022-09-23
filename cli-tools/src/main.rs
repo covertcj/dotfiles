@@ -7,6 +7,10 @@ mod git;
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Cli {
+    /// Skips running any destructive shell commands
+    #[arg(short = 'n', long)]
+    dry_run: bool,
+
     #[command(subcommand)]
     command: Commands,
 }
@@ -22,7 +26,7 @@ fn main() -> anyhow::Result<()> {
 
     let sh = Shell::new()?;
     match args.command {
-        Commands::GitAmend(opts) => git_ammend_date(&sh, opts),
+        Commands::GitAmend(opts) => git_ammend_date(&sh, args.dry_run, opts),
     }?;
 
     Ok(())
