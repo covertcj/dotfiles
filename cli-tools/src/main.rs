@@ -1,5 +1,5 @@
 use clap::{command, Parser, Subcommand};
-use git::{git_ammend_date, DateOpts};
+use git::{git_amend_date, git_spinoff_branch, DateOpts, SpinoffOpts};
 use xshell::Shell;
 
 mod git;
@@ -19,6 +19,8 @@ struct Cli {
 enum Commands {
     #[command(name = "gamend")]
     GitAmend(DateOpts),
+    #[command(name = "gspin")]
+    GitSpinoff(SpinoffOpts),
 }
 
 fn main() -> anyhow::Result<()> {
@@ -26,7 +28,8 @@ fn main() -> anyhow::Result<()> {
 
     let sh = Shell::new()?;
     match args.command {
-        Commands::GitAmend(opts) => git_ammend_date(&sh, args.dry_run, opts),
+        Commands::GitAmend(opts) => git_amend_date(&sh, args.dry_run, opts),
+        Commands::GitSpinoff(opts) => git_spinoff_branch(&sh, args.dry_run, opts),
     }?;
 
     Ok(())
