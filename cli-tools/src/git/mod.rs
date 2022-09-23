@@ -19,8 +19,6 @@ pub struct DateOpts {
     minutes: Option<i64>,
 }
 
-// TODO: well this worked, but it also means that I rewrote my local git history
-// for this repo, which isn't great...
 pub fn git_ammend_date(sh: &Shell, dry_run: bool, opts: DateOpts) -> Result<()> {
     let hour_offset = Duration::hours(opts.hours.unwrap_or(0));
     let minutes_offset = Duration::minutes(opts.minutes.unwrap_or(0));
