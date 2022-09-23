@@ -23,7 +23,7 @@ pub struct DateOpts {
 // for this repo, which isn't great...
 pub fn git_ammend_date(sh: &Shell, dry_run: bool, opts: DateOpts) -> Result<()> {
     let hour_offset = Duration::hours(opts.hours.unwrap_or(0));
-    let minutes_offset = Duration::hours(opts.minutes.unwrap_or(0));
+    let minutes_offset = Duration::minutes(opts.minutes.unwrap_or(0));
 
     let new_date = (Local::now() + hour_offset + minutes_offset).to_rfc2822();
 
