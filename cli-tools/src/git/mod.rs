@@ -1,3 +1,12 @@
+// TODO: I think this module makes a good candidate for a standalone cli app.
+// The app would be a set of subcommands that can each launch a dedicated
+// interface for interacting with git. Commands that seem obvious to me so far:
+//
+//   1. quick-git amend <some_opts>
+//   2. quick-git spinoff feat/new_branch
+//   3. quick git status  // like magit status with tab expand/collapse and
+//                        // stage/unstage capability
+
 use anyhow::Result;
 use chrono::{Duration, Local};
 use clap::Args;
