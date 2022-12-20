@@ -5,6 +5,11 @@
 
 SendMode Input
 
+; Ctrl F9 - restarts all windows explorer.
+^F9::
+    Runwait TASKKILL /F /IM explorer.exe
+    Run explorer.exe
+return
 
 ; if capslock is pressed on its own, treat it as escape
 ~Capslock::
