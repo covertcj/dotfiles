@@ -1,0 +1,13 @@
+[Unit]
+Description=KMonad Laptop Keyboard Config
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/path/to/kmonad /path/to/device_config.kbd
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
