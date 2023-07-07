@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-anyhow = "1.0.65"
-chrono = "0.4.22"
-clap = { version = "4.0.0-rc.2", features = ["derive"] }
-xshell = "0.2.2"
+anyhow = "1.0.71"
+chrono = { version = "0.4.26", features = ["clock"] }
+clap = { version = "4.3.11", features = ["derive"] }
+xshell = "0.2.3"
