@@ -1,0 +1,1 @@
+ACTION=="add", KERNEL=="event13", TAG+="systemd", ENV{SYSTEMD_WANTS}+="kmonad_usb_wasd60.service"
