@@ -5,13 +5,18 @@
 
 SendMode Input
 
+
 ; make the escape key send the grave/tilde keys instead
 ; this is for small keyboards that have an ESC instead of tilde, since this
 ; script uses capslock for ESC instead
-Esc::Send ``
-!Esc::Send !``
-^Esc::Send ^``
-+Esc::Send +``
+Esc::Send {`` Down}
+Esc Up::Send {`` Up}
+!Esc::Send {!`` Down}
+!Esc Up::Send {!`` Up}
+^Esc::Send {^`` Down}
+^Esc Up::Send {^`` Up}
++Esc::Send {+`` Down}
++Esc Up::Send {+`` Up}
 
 ; Ctrl F9 - restarts all windows explorer.
 ^F9::
@@ -90,6 +95,8 @@ SetCapsLockState, AlwaysOff
 ~Capslock & '::SendInput {Del Down}
 ~Capslock & ' up::SendInput {Del Up}
 
-; backup escape key for weird situations
+; backup escape keys for weird situations
 ~Capslock & `::Send {Esc Down}
 ~Capslock & ` up::Send {Esc Up}
+~Capslock & Esc::Send {Esc Down}
+~Capslock & Esc up::Send {Esc Up}
