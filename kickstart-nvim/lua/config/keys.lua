@@ -22,3 +22,6 @@ vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = '[D]elete Buffer' })
 -- Git
 vim.keymap.set('n', '<leader>gg', ':tab Git<CR>', { desc = '[G]it Status' })
 vim.keymap.set('n', '<leader>gG', ':vertical rightbelow Git<CR>', { desc = '[G]it Status Vertical Split' })
+vim.keymap.set('n', '<leader>gp', ':Git pull<CR>', { desc = '[G]it pull' })
+vim.keymap.set('n', '<leader>gP', ':Git push<CR>', { desc = '[G]it push' })
+vim.keymap.set('n', '<leader>gf', ':Git fetch<CR>', { desc = '[G]it fetch' })

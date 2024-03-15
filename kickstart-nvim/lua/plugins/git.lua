@@ -14,5 +14,15 @@ return {
 
   {
     'tpope/vim-fugitive',
+    config = function()
+      vim.api.nvim_create_augroup('FugitiveKeys', { clear = true })
+      vim.api.nvim_create_autocmd('Filetype', {
+        group = 'FugitiveKeys',
+        pattern = { 'fugitive' },
+        callback = function()
+          vim.keymap.set('n', '<TAB>', '=', { buffer = 0, remap = true })
+        end,
+      })
+    end,
   },
 }
