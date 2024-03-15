@@ -14,4 +14,4 @@ alias gm-="git merge -"
 alias gs="git status"
 alias gb="sk_git_checkout_branch"
 alias gbr="sk_git_checkout_branch_remote"
-
+alias lg="lazygit"
