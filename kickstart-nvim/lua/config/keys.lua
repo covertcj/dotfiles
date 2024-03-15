@@ -18,3 +18,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Buffers
 vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = '[D]elete Buffer' })
+
+-- Git
+vim.keymap.set('n', '<leader>gg', ':tab Git<CR>', { desc = '[G]it Status' })
+vim.keymap.set('n', '<leader>gG', ':vertical rightbelow Git<CR>', { desc = '[G]it Status Vertical Split' })
