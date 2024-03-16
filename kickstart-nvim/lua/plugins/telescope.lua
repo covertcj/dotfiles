@@ -75,6 +75,7 @@ return {
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
 
     vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find [B]uffer' })
+    vim.keymap.set('n', '<leader>tt', builtin.buffers, { desc = '[T]heme' })
 
     vim.keymap.set('n', '<leader>/', function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {

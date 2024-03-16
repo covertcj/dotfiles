@@ -9,6 +9,7 @@ return {
       ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
       ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
       ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
+      ['<leader>t'] = { name = 'Setting [T]oggles', _ = 'which_key_ignore' },
     }
   end,
 }
