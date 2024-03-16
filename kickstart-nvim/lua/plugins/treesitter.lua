@@ -19,6 +19,7 @@ return { -- Highlight, edit, and navigate code
       'tsx',
 
       'markdown',
+      'markdown_inline',
 
       'json',
       'toml',
