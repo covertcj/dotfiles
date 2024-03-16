@@ -25,3 +25,7 @@ vim.keymap.set('n', '<leader>gG', ':vertical rightbelow Git<CR>', { desc = '[G]i
 vim.keymap.set('n', '<leader>gp', ':Git pull<CR>', { desc = '[G]it pull' })
 vim.keymap.set('n', '<leader>gP', ':Git push<CR>', { desc = '[G]it push' })
 vim.keymap.set('n', '<leader>gf', ':Git fetch<CR>', { desc = '[G]it fetch' })
+
+-- Find
+vim.keymap.set('n', '<leader>fo', ':Other<CR>', { desc = '[F]ind Other Files' })
+vim.keymap.set('n', '<leader>fO', ':OtherClear<CR>:Other<CR>', { desc = 'Clear and [F]ind Other Files' })
