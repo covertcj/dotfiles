@@ -6,10 +6,11 @@ return {
 
     -- document existing key chains
     require('which-key').register {
-      ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
-      ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-      ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
-      ['<leader>t'] = { name = 'Setting [T]oggles', _ = 'which_key_ignore' },
+      ['<leader>b'] = { name = 'Buffer', _ = 'which_key_ignore' },
+      ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
+      ['<leader>f'] = { name = 'Find', _ = 'which_key_ignore' },
+      ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
+      ['<leader>t'] = { name = 'Setting toggles', _ = 'which_key_ignore' },
     }
   end,
 }

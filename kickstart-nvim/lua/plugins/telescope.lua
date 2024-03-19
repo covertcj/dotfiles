@@ -63,37 +63,37 @@ return {
     pcall(require('telescope').load_extension, 'ui-select')
 
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
-    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind [K]eymaps' })
-    vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Find Files' })
-    vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Find Files' })
-    vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind [T]elescope Command' })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
-    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
-    vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind existing [B]uffers' })
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help' })
+    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Keymaps' })
+    vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Files' })
+    vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Files' })
+    vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = 'Telescope commands' })
+    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Word under cursor' })
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Grep' })
+    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Diagnostics' })
+    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume' })
+    vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Recent Files ("." for repeat)' })
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Buffers' })
 
-    vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find [B]uffer' })
-    vim.keymap.set('n', '<leader>tt', builtin.buffers, { desc = '[T]heme' })
+    vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find buffer' })
+    vim.keymap.set('n', '<leader>tt', builtin.buffers, { desc = 'Theme' })
 
     vim.keymap.set('n', '<leader>/', function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
         previewer = false,
       })
-    end, { desc = '[/] Fuzzily search in current buffer' })
+    end, { desc = '/ Fuzzily search in current buffer' })
 
-    vim.keymap.set('n', '<leader>s/', function()
+    vim.keymap.set('n', '<leader>f/', function()
       builtin.live_grep {
         grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
+        prompt_title = 'Grep open files',
       }
-    end, { desc = '[F]ind [/] in Open Files' })
+    end, { desc = 'Grep open files' })
 
-    vim.keymap.set('n', '<leader>sn', function()
+    vim.keymap.set('n', '<leader>fn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[F]ind [N]eovim files' })
+    end, { desc = 'Find Neovim files' })
   end,
 }

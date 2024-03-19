@@ -11,6 +11,6 @@ return {
       },
     }
 
-    vim.keymap.set('n', '<leader>ff', '<cmd>Oil<cr>', { desc = '[F]ile explorer' })
+    vim.keymap.set('n', '<leader>ff', '<cmd>Oil<cr>', { desc = 'File explorer' })
   end,
 }

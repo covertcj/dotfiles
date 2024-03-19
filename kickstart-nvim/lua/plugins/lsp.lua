@@ -22,16 +22,16 @@ return {
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          map('<leader>cD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-          map('<leader>cs', require('telescope.builtin').lsp_document_symbols, 'Document [S]ymbols')
-          map('<leader>cS', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace [S]ymbols')
-          map('<leader>cr', ':Lspsaga rename<CR>', '[C]ode [R]ename')
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-          map('K', ':Lspsaga hover_doc<CR>', 'Hover Documentation')
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('gd', require('telescope.builtin').lsp_definitions, 'Goto definition')
+          map('gr', require('telescope.builtin').lsp_references, 'Goto references')
+          map('gI', require('telescope.builtin').lsp_implementations, 'Goto implementation')
+          map('<leader>cD', require('telescope.builtin').lsp_type_definitions, 'Type definition')
+          map('<leader>cs', require('telescope.builtin').lsp_document_symbols, 'Document symbols')
+          map('<leader>cS', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace symbols')
+          map('<leader>cr', ':Lspsaga rename<CR>', 'Rename')
+          map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
+          map('K', ':Lspsaga hover_doc<CR>', 'Hover documentation')
+          map('gD', vim.lsp.buf.declaration, 'Goto declaration')
 
           -- highlight other references of item under cursor
           local client = vim.lsp.get_client_by_id(event.data.client_id)
