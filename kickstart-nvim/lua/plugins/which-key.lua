@@ -10,6 +10,7 @@ return {
       ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
       ['<leader>f'] = { name = 'Find', _ = 'which_key_ignore' },
       ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
+      ['<leader>o'] = { name = 'Open', _ = 'which_key_ignore' },
       ['<leader>t'] = { name = 'Setting toggles', _ = 'which_key_ignore' },
     }
   end,
