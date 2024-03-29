@@ -48,7 +48,6 @@ return {
     { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
 
     { '<leader>bb', '<cmd>Telescope buffers<cr>', desc = 'Find buffer' },
-    { '<leader>tt', '<cmd>Telescope colorscheme<cr>', desc = 'Theme' },
   },
   config = function()
     require('telescope').setup {

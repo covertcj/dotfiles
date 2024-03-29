@@ -26,7 +26,4 @@ require('lazy').setup('plugins', {
       lazy = '💤 ',
     } or {},
   },
-  install = {
-    colorscheme = { vim.g.cjc_colorscheme },
-  },
 })
