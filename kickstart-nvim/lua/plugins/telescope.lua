@@ -34,6 +34,22 @@ return {
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
+  keys = {
+    { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = 'Help' },
+    { '<leader>fk', '<cmd>Telescope keymaps<cr>', desc = 'Keymaps' },
+    { '<leader><leader>', '<cmd>Telescope find_files<cr>', desc = 'Files' },
+    { '<C-p>', '<cmd>Telescope find_files<cr>', desc = 'Files' },
+    { '<leader>ft', '<cmd>Telescope builtin<cr>', desc = 'Telescope commands' },
+    { '<leader>fw', '<cmd>Telescope grep_string<cr>', desc = 'Word under cursor' },
+    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Grep' },
+    { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = 'Diagnostics' },
+    { '<leader>fr', '<cmd>Telescope resume<cr>', desc = 'Resume' },
+    { '<leader>f.', '<cmd>Telescope oldfiles<cr>', desc = 'Recent files' },
+    { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
+
+    { '<leader>bb', '<cmd>Telescope buffers<cr>', desc = 'Find buffer' },
+    { '<leader>tt', '<cmd>Telescope colorscheme<cr>', desc = 'Theme' },
+  },
   config = function()
     require('telescope').setup {
       defaults = {
@@ -55,6 +71,9 @@ return {
         find_files = {
           path_display = filenameFirst,
         },
+        colorscheme = {
+          enable_preview = true,
+        },
       },
     }
 
@@ -63,21 +82,6 @@ return {
     pcall(require('telescope').load_extension, 'ui-select')
 
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Help' })
-    vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Keymaps' })
-    vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = 'Files' })
-    vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Files' })
-    vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = 'Telescope commands' })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Word under cursor' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Grep' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Diagnostics' })
-    vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume' })
-    vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Buffers' })
-
-    vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find buffer' })
-    vim.keymap.set('n', '<leader>tt', builtin.buffers, { desc = 'Theme' })
-
     vim.keymap.set('n', '<leader>/', function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
