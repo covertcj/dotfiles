@@ -1,10 +1,47 @@
 return {
-  'ishan9299/nvim-solarized-lua',
   {
-    'bluz71/vim-moonfly-colors',
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'moonfly'
-    end,
+    'marko-cerovac/material.nvim',
+    keys = {
+      { '<leader>tt', '<cmd>lua require("material.functions").change_style("deep ocean")<cr>', desc = 'Dark theme' },
+      { '<leader>tT', '<cmd>lua require("material.functions").change_style("lighter")<cr>', desc = 'Light theme' },
+    },
+    opts = {
+      constrast = {
+        non_current_windows = true,
+      },
+      plugins = {
+        -- "dap",
+        -- "dashboard",
+        -- "eyeliner",
+        -- "fidget",
+        -- "flash",
+        'gitsigns',
+        'harpoon',
+        -- "hop",
+        -- "illuminate",
+        -- "indent-blankline",
+        'lspsaga',
+        'mini',
+        'neogit',
+        'neotest',
+        -- "neo-tree",
+        'neorg',
+        -- "noice",
+        'nvim-cmp',
+        -- "nvim-navic",
+        -- "nvim-tree",
+        'nvim-web-devicons',
+        -- "rainbow-delimiters",
+        -- "sneak",
+        'telescope',
+        'trouble',
+        'which-key',
+        -- "nvim-notify",
+      },
+    },
+    high_visibility = {
+      lighter = true,
+      darker = false,
+    },
   },
 }
