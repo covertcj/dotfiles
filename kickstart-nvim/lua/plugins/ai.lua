@@ -4,17 +4,27 @@
 return {
   {
     'zbirenbaum/copilot.lua',
-    config = function()
-      require('copilot').setup {
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      }
-    end,
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
   },
   {
     'zbirenbaum/copilot-cmp',
-    config = function()
-      require('copilot_cmp').setup()
-    end,
+    opts = {},
+  },
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    keys = {
+      { '<leader>oc', '<cmd>CopilotChatToggle<cr>', desc = 'Open Copilot Chat' },
+      { '<leader>oe', '<cmd>CopilotChatExplain<cr>', desc = 'Open Copilot Explain' },
+    },
+    branch = 'canary',
+    dependencies = {
+      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+    },
+    opts = {},
+  },
   },
 }
