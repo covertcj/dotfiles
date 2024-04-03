@@ -14,8 +14,9 @@ return {
 
   {
     'tpope/vim-fugitive',
+    cmd = { 'Git', 'G' },
     keys = {
-      { '<leader>gG', '<cmd>vertical rightbelow Git<cr>', desc = 'Git status' },
+      { '<leader>gg', '<cmd>vertical rightbelow Git<cr>', desc = 'Git status' },
       { '<leader>gp', '<cmd>Git pull<cr>', desc = 'Git pull' },
       { '<leader>gP', '<cmd>Git push<cr>', desc = 'Git push' },
       { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
@@ -33,25 +34,5 @@ return {
   },
   {
     'f-person/git-blame.nvim',
-  },
-  {
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - Diff integration
-
-      -- Only one of these is needed, not both.
-      'nvim-telescope/telescope.nvim', -- optional
-      --'ibhagwan/fzf-lua', -- optional
-    },
-    keys = { { '<leader>gg', '<cmd>Neogit<cr>', desc = 'Git status' } },
-    opts = {
-      disable_context_highlighting = true,
-      graph_style = 'unicode',
-      integrations = {
-        telescope = true,
-        diffview = true,
-      },
-    },
   },
 }
