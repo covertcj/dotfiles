@@ -11,6 +11,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.cursorline = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.tabstop = 2
 
 vim.opt.mouse = 'a'
 vim.opt.clipboard = 'unnamedplus'
