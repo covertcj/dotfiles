@@ -1,18 +1,19 @@
 return {
   'folke/which-key.nvim',
-  event = 'VimEnter',
+  event = 'VeryLazy',
   config = function()
-    require('which-key').setup()
+    local wk = require 'which-key'
+    wk.setup()
 
     -- document existing key chains
-    require('which-key').register {
-      ['<leader>b'] = { name = 'Buffer', _ = 'which_key_ignore' },
-      ['<leader>c'] = { name = 'Code', _ = 'which_key_ignore' },
-      ['<leader>f'] = { name = 'Find', _ = 'which_key_ignore' },
-      ['<leader>g'] = { name = 'Git', _ = 'which_key_ignore' },
-      ['<leader>h'] = { name = 'Harpoon', _ = 'which_key_ignore' },
-      ['<leader>o'] = { name = 'Open', _ = 'which_key_ignore' },
-      ['<leader>t'] = { name = 'Setting toggles', _ = 'which_key_ignore' },
+    wk.add {
+      { '<leader>b', group = 'Buffer' },
+      { '<leader>c', group = 'Code' },
+      { '<leader>f', group = 'Find' },
+      { '<leader>g', group = 'Git' },
+      { '<leader>h', group = 'Harpoon' },
+      { '<leader>o', group = 'Open' },
+      { '<leader>t', group = 'Setting toggles' },
     }
   end,
 }
