@@ -2,7 +2,8 @@ local wezterm = require("wezterm")
 local config = {}
 
 config.color_scheme = "Catppuccin Mocha"
-config.font = wezterm.font("IosevkaTerm Nerd Font Mono")
+config.font =
+	wezterm.font_with_fallback({ "Iosevka", "IosevkaTerm Nerd Font Mono", "Ubuntu Mono", "Symbols Nerd Font Mono" })
 config.font_size = 12.0
 
 config.hide_tab_bar_if_only_one_tab = true
