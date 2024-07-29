@@ -2,6 +2,9 @@ return {
   {
     'nvim-neorg/neorg',
     dependencies = { 'vhyrro/luarocks.nvim' },
+    ft = 'ft',
+    cmd = 'Neorg',
+    keys = '<localleader>nn',
     opts = {
       load = {
         ['core.defaults'] = {},
@@ -16,7 +19,7 @@ return {
         ['core.keybinds'] = {
           config = {
             default_keybinds = true,
-            neorg_leader = '<leader>',
+            neorg_leader = '<localleader>',
           },
         },
         ['core.dirman'] = {

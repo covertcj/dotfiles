@@ -4,6 +4,7 @@
 return {
   {
     'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
     opts = {
       suggestion = { enabled = false },
       panel = { enabled = false },
@@ -11,6 +12,7 @@ return {
   },
   {
     'zbirenbaum/copilot-cmp',
+    event = 'InsertEnter',
     opts = {},
   },
   {
