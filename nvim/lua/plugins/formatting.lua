@@ -15,10 +15,10 @@ return { -- Autoformat
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
-      javascript = { javascript },
-      javascriptreact = { javascript },
-      typescript = { javascript },
-      typescriptreact = { javascript },
+      javascript = javascript,
+      javascriptreact = javascript,
+      typescript = javascript,
+      typescriptreact = javascript,
       rust = { 'rustfmt' },
     },
   },
