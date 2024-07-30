@@ -2,20 +2,64 @@ return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
   dependencies = { 'nvim-lua/plenary.nvim' },
-  config = function()
-    local harpoon = require('harpoon').setup()
-
-    vim.keymap.set('n', '<leader>ha', function()
-      harpoon:list():append()
-    end, { desc = 'Add file' })
-    vim.keymap.set('n', '<leader>hl', function()
-      harpoon.ui:toggle_quick_menu(harpoon:list())
-    end, { desc = 'List' })
-
-    for i = 1, 10, 1 do
-      vim.keymap.set('n', '<leader>h' .. i, function()
-        harpoon:list():select(i)
-      end, { desc = 'Harpoon ' .. i })
-    end
-  end,
+  keys = {
+    {
+      '<leader>ha',
+      function()
+        require('harpoon'):list():add()
+      end,
+      desc = 'Add file',
+    },
+    {
+      '<leader>hl',
+      function()
+        local harpoon = require 'harpoon'
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end,
+      desc = 'List',
+    },
+    {
+      '<M-!>',
+      function()
+        require('harpoon'):list():select(1)
+      end,
+      desc = 'Harpoon 1',
+    },
+    {
+      '<M-@>',
+      function()
+        require('harpoon'):list():select(2)
+      end,
+      desc = 'Harpoon 2',
+    },
+    {
+      '<M-#>',
+      function()
+        require('harpoon'):list():select(3)
+      end,
+      desc = 'Harpoon 3',
+    },
+    {
+      '<M-$>',
+      function()
+        require('harpoon'):list():select(4)
+      end,
+      desc = 'Harpoon 4',
+    },
+    {
+      '<M-J>',
+      function()
+        require('harpoon'):list():next()
+      end,
+      desc = 'Harpoon Next',
+    },
+    {
+      '<M-K>',
+      function()
+        require('harpoon'):list():prev()
+      end,
+      desc = 'Harpoon Previous',
+    },
+  },
+  opts = {},
 }
