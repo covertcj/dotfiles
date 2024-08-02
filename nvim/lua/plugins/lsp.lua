@@ -9,10 +9,6 @@ return {
 
       -- useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
-
-      -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-      -- used for completion, annotations and signatures of Neovim apis
-      { 'folke/neodev.nvim', opts = {} },
     },
     event = { 'BufReadPost', 'BufNewFile' },
     cmd = { 'LspInfo', 'LspInstall', 'LspUninstall' },
@@ -69,6 +65,9 @@ return {
               completion = {
                 callSnippet = 'Replace',
               },
+              diagnostics = {
+                globals = { 'vim' },
+              },
             },
           },
         },
@@ -115,5 +114,10 @@ return {
       'nvim-treesitter/nvim-treesitter',
       'nvim-tree/nvim-web-devicons',
     },
+  },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {},
   },
 }

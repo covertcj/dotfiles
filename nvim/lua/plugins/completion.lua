@@ -86,6 +86,7 @@ return { -- Autocompletion
       },
       sources = {
         { name = 'copilot' },
+        { name = 'lazydev' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
