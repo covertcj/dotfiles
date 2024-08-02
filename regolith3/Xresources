@@ -1,0 +1,3 @@
+!regolith.look.path: /usr/share/regolith-look/catppuccin
+regolith.look.path: /usr/share/regolith-look/ayu-dark
+wm.binding.sleep: Ctrl+Alt+Shift+l

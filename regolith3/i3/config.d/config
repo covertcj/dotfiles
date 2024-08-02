@@ -1,0 +1,8 @@
+# move focused workspace between monitors
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
+bindsym $mod+Ctrl+j move workspace to output left
+bindsym $mod+Ctrl+k move workspace to output right
+
+# Screenshot to clipboard
+bindsym --release $mod+Shift+s exec "/var/lib/flatpak/exports/bin/org.flameshot.Flameshot gui"
