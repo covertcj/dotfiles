@@ -1,13 +1,3 @@
-local function filenameFirst(_, path)
-  local tail = vim.fs.basename(path)
-  local parent = vim.fs.dirname(path)
-  if parent == '.' then
-    return tail
-  end
-  return string.format('%s\t\t%s', tail, parent)
-end
-
--- recolors telescope results to work with the filenameFirst path_display
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'TelescopeResults',
   callback = function(ctx)
@@ -20,8 +10,6 @@ vim.api.nvim_create_autocmd('FileType', {
 
 return {
   'nvim-telescope/telescope.nvim',
-  event = 'VimEnter',
-  branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
@@ -34,6 +22,7 @@ return {
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
+  cmd = 'Telescope',
   keys = {
     { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = 'Help' },
     { '<leader>fk', '<cmd>Telescope keymaps<cr>', desc = 'Keymaps' },
@@ -48,10 +37,17 @@ return {
     { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
 
     { '<leader>bb', '<cmd>Telescope buffers<cr>', desc = 'Find buffer' },
+
+    { '<leader>fn' },
+    { '<leader>f/' },
+    { '<leader>/' },
   },
   config = function()
     require('telescope').setup {
       defaults = {
+        path_display = {
+          'filename_first',
+        },
         mappings = {
           i = {
             ['<C-p>'] = require('telescope.actions.layout').toggle_preview,
@@ -67,9 +63,6 @@ return {
         },
       },
       pickers = {
-        find_files = {
-          path_display = filenameFirst,
-        },
         colorscheme = {
           enable_preview = true,
         },
