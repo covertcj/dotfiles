@@ -46,6 +46,6 @@ bindings = [
 { action = "ReceiveChar", key = "L", mods = "Control" },
 ]
 
-[window.padding]
-x = 0
-y = 0
+[window]
+option_as_alt = "Both"
+padding = { x = 0 , y = 0 }
