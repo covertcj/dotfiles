@@ -51,12 +51,19 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      local nvim_lsp = require 'lspconfig'
       local servers = {
         pyright = {},
         rust_analyzer = {},
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
-        tsserver = {},
+        denols = {
+          root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+        },
+        tsserver = {
+          root_dir = nvim_lsp.util.root_pattern 'package.json',
+          single_file_support = false,
+        },
         eslint = {},
 
         lua_ls = {
@@ -71,6 +78,7 @@ return {
             },
           },
         },
+        typos_lsp = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -81,7 +89,7 @@ return {
       --  You can press `g?` for help in this menu
       require('mason').setup()
 
-      -- You can add other tools here that you want Mason to install
+      -- You can add other tools here that you want Mason to istall
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
