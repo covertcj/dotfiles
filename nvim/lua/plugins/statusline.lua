@@ -13,10 +13,10 @@ return {
       },
       lualine_b = { 'diff', 'diagnostics' },
       lualine_c = {
-        {
-          'filename',
-          path = 1,
-        },
+        { 'filename', path = 1 },
+      },
+      lualine_x = {
+        { 'filetype', icon_only = true },
       },
     },
   },
