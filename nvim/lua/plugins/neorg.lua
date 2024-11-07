@@ -2,7 +2,7 @@ return {
   {
     'nvim-neorg/neorg',
     dependencies = { 'vhyrro/luarocks.nvim' },
-    ft = 'ft',
+    ft = 'norg',
     cmd = 'Neorg',
     keys = '<localleader>nn',
     opts = {
