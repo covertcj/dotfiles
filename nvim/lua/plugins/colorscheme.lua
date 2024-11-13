@@ -9,7 +9,24 @@ return {
     },
     lazy = false,
     config = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      require('catppuccin').setup {
+        flavor = 'auto',
+        background = {
+          light = 'latte',
+          dark = 'mocha',
+        },
+        no_italic = true,
+        color_overrides = {
+          mocha = {
+            base = '#201d18',
+            crust = '#1b1111',
+            mantle = '#1e1910',
+            surface0 = '#302a20',
+          },
+        },
+      }
+
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 }
