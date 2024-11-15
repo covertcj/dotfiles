@@ -15,7 +15,7 @@ return {
     require('neotest').setup {
       adapters = {
         require 'neotest-jest' {
-          jestCommnad = 'yarn run test --',
+          jestCommand = 'yarn run test --',
           jest_test_discovery = false,
           cwd = function(file)
             if string.find(file, '/packages') then
