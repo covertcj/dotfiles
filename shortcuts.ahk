@@ -2,6 +2,9 @@
 #UseHook
 #SingleInstance force
 
+if not A_IsAdmin
+    Run '*RunAs "' A_ScriptFullPath '"'
+
 SendMode("Input")
 
 ; make the escape key send the grave/tilde keys instead
