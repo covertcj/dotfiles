@@ -104,11 +104,26 @@ SetCapsLockState("AlwaysOff")
 ~Capslock & ` up::Hyper("{Esc Up}")
 ~Capslock & Esc::Hyper("{Esc Down}")
 ~Capslock & Esc up::Hyper("{Esc Up}")
+; remap mouse button to \ to turn off discord mic
+#HotIf WinActive("ahk_class DayZ")
+XButton1::\
+
+
+; Autorun - Press X
+#HotIf WinActive("ahk_class DayZ")
+~*'::
+{
+    if GetKeyState("w") {
+        Send('{shift Up}')
+        Send('{w Up}')
+    } else {
+        Send('{shift Down}')
+        Send('{w Down}')
+    }
+}
 
 Komorebic(cmd) {
     RunWait(Format("komorebic.exe {}", cmd), , "Hide")
-}
-
 !q::Komorebic("close")
 !m::Komorebic("minimize")
 
