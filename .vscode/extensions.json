@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "streetsidesoftware.code-spell-checker",
-    "swellaby.rust-pack",
     "wayou.vscode-todo-highlight"
   ]
 }
